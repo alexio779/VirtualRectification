@@ -1,0 +1,184 @@
+﻿<Window x:Class="virtual_rectification.MainCalc2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:local="clr-namespace:virtual_rectification"
+        mc:Ignorable="d"
+        Title="Лабораторная Работа по ректификации бинарных смесей" Height="720" Width="1280"
+        WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" Icon="/Resources/flask.png">
+    <Grid x:Name="Grid" Background="GhostWhite">
+
+        <Border>
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="lightBlue" Offset="0.0"/>
+                    <GradientStop Color="LightSteelBlue" Offset="0.5"/>
+                    <GradientStop Color="Aquamarine" Offset="1.0"/>
+
+
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+
+        <!--Фон за схемой-->
+        <Rectangle Fill="WhiteSmoke" Width="810" Height="647" Stroke="SteelBlue" Margin="235,18,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <!--Змеевик-->
+        <Image x:Name="water_def" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator.gif"   Margin="551,98,0,0" Height="6" VerticalAlignment="Top" HorizontalAlignment="Left" Width="102"/>
+        <Image x:Name="water_def2" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator2.gif"  Margin="551,101,0,0" Height="64" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
+        <Image x:Name="water_def3" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator.gif"  Margin="549,165,0,0" Height="5" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+
+        <Image x:Name="water_def4" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator.gif"  Margin="515,315,0,0" Height="6" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112"/>
+
+        <Image x:Name="water_def5" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator2.gif"  Margin="604,168,0,0" Height="83" VerticalAlignment="Top" HorizontalAlignment="Left" Width="37"/>
+        <Image x:Name="water_def6" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator2.gif"  Margin="613,287,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="14"/>
+
+        <!--мерник-->
+        <Image x:Name="water_def7" gif:ImageBehavior.AutoStart="False" Visibility="Hidden" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator_up.gif"  Margin="606,233,0,0" Height="55" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35"/>
+
+        <!--холодильник-->
+        <Image x:Name="water_cold_up" gif:ImageBehavior.AnimatedSource="Resources/water_cold_up.gif" gif:ImageBehavior.AutoStart="False" Visibility="Hidden" Margin="945,59,0,0" Stretch="Fill" Height="213" VerticalAlignment="Top" HorizontalAlignment="Left" Width="13"/>
+        <Image x:Name="distildone" gif:ImageBehavior.AnimatedSource="Resources/distil_done_fr.gif"  Visibility="Hidden" Margin="929,44,0,0" Stretch="Fill" Height="238" VerticalAlignment="Top" HorizontalAlignment="Left" Width="16"/>
+
+        <Image x:Name="water_cold_up2" gif:ImageBehavior.AnimatedSource="Resources/water_cold_up.gif" gif:ImageBehavior.AutoStart="False" Visibility="Hidden" Margin="916,59,0,0" Stretch="Fill" Height="213" VerticalAlignment="Top" HorizontalAlignment="Left" Width="13"/>
+        <Image x:Name="cold_water_fr" gif:ImageBehavior.AnimatedSource="Resources/cold_water_fr.gif" gif:ImageBehavior.AutoStart="False" Visibility="Visible" Margin="957,262,0,0" HorizontalAlignment="Left" Width="83" Height="8" VerticalAlignment="Top"/>
+        <Image x:Name="warm_water_fr" gif:ImageBehavior.AnimatedSource="Resources/warm_water_fr.gif" gif:ImageBehavior.AutoStart="False" Visibility="Hidden" Margin="957,59,0,0" HorizontalAlignment="Left" Width="83" Height="8" VerticalAlignment="Top"/>
+
+        <!--готовый продукт-->
+        <Image x:Name="bubbles1" gif:ImageBehavior.AnimatedSource="Resources/bubbles.gif" Margin="991,421,0,0" Stretch="Fill" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="8"/>
+        <Image x:Name="bubbles2" gif:ImageBehavior.AnimatedSource="/Resources/bubbles.gif" Margin="973,421,0,0" Stretch="Fill" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="8"/>
+
+        <Image x:Name="distil_g" gif:ImageBehavior.AnimatedSource="Resources/distil_g.gif" gif:ImageBehavior.AutoStart="False" Margin="867,410,0,0" Stretch="Fill" Height="85" VerticalAlignment="Top" HorizontalAlignment="Left" Width="101"/>
+        <Rectangle x:Name="distil_line" Width="49" Height="1" Margin="910,304,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Fill="Blue">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-66.265"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <!--Дефлегматор-->
+        <Image x:Name="flegma_s" gif:ImageBehavior.AnimatedSource="Resources/flegma_s.gif" gif:ImageBehavior.AutoStart="False" Margin="503,176,0,0" Stretch="Fill" Height="98" VerticalAlignment="Top" HorizontalAlignment="Left" Width="101"/>
+        <Image x:Name="vapour_gray1" gif:ImageBehavior.AnimatedSource="Resources/vapour_gray.gif" Visibility="Hidden" Margin="515,44,0,0" Stretch="Fill" Height="132" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97"/>
+        <Image x:Name="vapour_gray2" gif:ImageBehavior.AnimatedSource="/Resources/vapour_gray.gif" Visibility="Hidden" Margin="641,-68,0,0" Stretch="Fill" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left" Width="24" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="vapour_gray3" gif:ImageBehavior.AnimatedSource="/Resources/vapour_gray.gif" Visibility="Hidden" Margin="833,-67,0,0" Stretch="Fill" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left" Width="24" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="flegma_r" gif:ImageBehavior.AnimatedSource="Resources/flegma_r.gif" Margin="402,250,0,0" Stretch="Fill" Height="3" VerticalAlignment="Top" HorizontalAlignment="Left" Width="101" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-14.56"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <!--Исходная смесь-->
+
+        <Image gif:ImageBehavior.AnimatedSource="Resources/braga.gif" x:Name="braga" Margin="267,488,0,0" Stretch="Fill" gif:ImageBehavior.AutoStart="False" Visibility="Visible" Height="112" VerticalAlignment="Top" HorizontalAlignment="Left" Width="215"/>
+
+        <Rectangle x:Name="rec1" HorizontalAlignment="Left" Height="10" Margin="275,562,0,0" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="rec2" HorizontalAlignment="Left" Height="10" Margin="274,580,0,0" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="rec3" HorizontalAlignment="Left" Height="28" Margin="449,562,0,0" VerticalAlignment="Top" Width="9" RadiusX="5" RadiusY="5"/>
+
+        <!--Пар из куба-->
+        <Image x:Name="vapour_blue1" gif:ImageBehavior.AnimatedSource="Resources/vapour_blue.gif" Visibility="Hidden" Margin="267,320,0,0" Stretch="Fill" Height="180" VerticalAlignment="Top" HorizontalAlignment="Left" Width="215"/>
+        <Image x:Name="vapour_blue2" gif:ImageBehavior.AnimatedSource="/Resources/vapour_blue.gif" Visibility="Hidden" Margin="347,176,0,0" Stretch="Fill" Height="151" VerticalAlignment="Top" HorizontalAlignment="Left" Width="56"/>
+        <Image x:Name="vapour_gray4" gif:ImageBehavior.AnimatedSource="/Resources/vapour_gray.gif" Visibility="Hidden" Margin="423,80,0,0" Stretch="Fill" Height="168" VerticalAlignment="Top" HorizontalAlignment="Left" Width="24" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <!--Капли-->
+        <Image x:Name="drops1" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" Margin="385,272,0,0" Stretch="Uniform" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+        <Image x:Name="drops2" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" Margin="370,272,0,0" Stretch="Uniform" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+        <Image x:Name="drops3" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" Margin="355,272,0,0" Stretch="Uniform" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+        <Image x:Name="drops4" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" Margin="535,97,0,0" Stretch="Uniform" Height="79" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+        <Image x:Name="drops5" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" Margin="559,97,0,0" Stretch="Uniform" Height="79" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+
+        <!--Нагревающий элемент
+        <Image x:Name="red1" Visibility="Visible" Source="/Resources/redG1.png" Margin="279,564,0,0" Height="6" VerticalAlignment="Top" HorizontalAlignment="Left" Width="172"></Image>
+        <Image x:Name="red2" Visibility="Visible" Source="/Resources/redG1.png" Margin="279,582,0,0" Height="6" VerticalAlignment="Top" HorizontalAlignment="Left" Width="172"></Image>
+        <Image x:Name="red3" Visibility="Visible" Source="/Resources/redV1.png" Margin="451,564,0,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Left" Width="6"></Image>
+        -->
+
+        <!--Основная схема-->
+
+        <Image Source="Resources/REK_3.2_obr2_new_2.png" Stretch="Uniform" Margin="237,20,0,0" Height="643" VerticalAlignment="Top" HorizontalAlignment="Left" Width="806"/>
+        <Image x:Name="drops6" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif"  Visibility="Hidden" Margin="919,327,0,0" Stretch="Uniform" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+
+        <Label x:Name="label" Content="ЛАТР" HorizontalAlignment="Left" Margin="333,629,0,0" VerticalAlignment="Top" Width="40"/>
+
+        <Label Content="Панель управления" Margin="0,18,0,0" HorizontalContentAlignment="Center" FontSize="18" FontFamily="Arial" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="31" Width="235"/>
+
+        <DockPanel x:Name="tmp_slider"  IsEnabled="False" VerticalAlignment="Top" Margin="29,217,0,0" Height="28" HorizontalAlignment="Left" Width="177">
+            <TextBox x:Name="tmp_text" Text="{Binding ElementName=tmp_slider_main, Path=Value, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" DockPanel.Dock="Right" TextAlignment="Right" Width="39" />
+            <Slider x:Name="tmp_slider_main" Minimum="0" Maximum="100" TickPlacement="None" TickFrequency="0.1" IsSnapToTickEnabled="True" ValueChanged="tmp_slider_main_ValueChanged"/>
+        </DockPanel>
+
+        <!--кнопки панели управления-->
+        <Button x:Name="hot" HorizontalContentAlignment="Center" Content="Включить нагрев" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="151" Click="Hot_Click" Margin="42,176,0,0"/>
+        <Button x:Name="voda_pusk" Content="Подать воду" FontSize="14" Margin="41,118,0,0" Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="152" Click="Voda_Click"/>
+        <Button x:Name="button" Content="Залить смесь" FontSize="14" HorizontalAlignment="Left" Margin="42,65,0,0" VerticalAlignment="Top" Height="36" Width="151" Click="button_Click"></Button>
+
+        <!--Таймер-->
+        <Label x:Name="time_label" Margin="246,20,0,0" VerticalContentAlignment="Center" Height="49" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134"></Label>
+
+    </Grid>
+</Window>
