@@ -21,6 +21,7 @@
 
                 </LinearGradientBrush>
             </Border.Background>
+            <Button x:Name="button1" Content="Button" Margin="1090,620,0,0" Width="151" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         </Border>
 
 
