@@ -11,6 +11,7 @@ namespace virtual_rectification
 {
     public partial class MainCalc2 : Window
     {
+        bool _isTempered = false;
         //1 -й кусок кода, отвечающий за таймер
         DispatcherTimer dt = new DispatcherTimer();
         Stopwatch sw = new Stopwatch();
@@ -27,6 +28,8 @@ namespace virtual_rectification
             sw.Start();
             dt.Start();
             //------------------------------------
+
+            
         }
 
         //3-й кусок кода, отвечающий за таймер (событие "тика")
@@ -98,6 +101,7 @@ namespace virtual_rectification
         {
             var controller1 = ImageBehavior.GetAnimationController(braga);
             controller1.Play();
+            flegmaEvent();
         }
 
         //функция обрабатывает нажатие на кнопку "Подать воду"
@@ -188,6 +192,13 @@ namespace virtual_rectification
             }
         }
 
+        //Функция отвечает за флегму
+        void flegmaEvent()
+        {
+            var controller0 = ImageBehavior.GetAnimationController(flegma_s);
+            controller0.Play();
+        }
+
         //Функция выключения воды в дефлегматоре и холодильнике
         void DeflegmatorStopWater()
         {
@@ -273,6 +284,23 @@ namespace virtual_rectification
             tmp_slider_main.Value = 0;
         }
 
+        //Это функция отвечет за исчезновение пара
+        async void vapor_finish()
+        {
+            await Task.Delay(2000);
+            double cold_op = 0;
+            vapour_blue1.Opacity = cold_op;
+            vapour_blue2.Opacity = cold_op;
+            vapour_gray4.Opacity = cold_op;
+            vapour_gray_l.Opacity = cold_op;
+            vapour_gray2.Opacity = cold_op;
+            vapour_gray1.Opacity = cold_op;
+            vapour_gray3.Opacity = cold_op;
+
+            _isTempered = false;
+            
+        }
+
         //Отслеживание значения слайдера температуры нагрева и спавним пар
         private void tmp_slider_main_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -291,19 +319,47 @@ namespace virtual_rectification
             var controller = ImageBehavior.GetAnimationController(braga);
 
             double vapour_opacity = Math.Round(tmp_slider_main.Value)/100;
+            
 
-            if (controller.IsComplete==true && tmp_slider_main.Value >= 50)
+            if (controller.IsComplete==true && tmp_slider_main.Value >= 60)
             {
                 vapour_blue1.Opacity = vapour_opacity;
                 vapour_blue2.Opacity = vapour_opacity;
                 vapour_gray4.Opacity = vapour_opacity;
+                vapour_gray_l.Opacity = vapour_opacity;
+                vapour_gray2.Opacity = vapour_opacity;
+                vapour_gray1.Opacity = vapour_opacity;
+                vapour_gray3.Opacity = vapour_opacity;
+
+                _isTempered = true;
             }
 
-            if (controller.IsComplete == true && tmp_slider_main.Value < 50)
+            if (controller.IsComplete == true && tmp_slider_main.Value < 50 && _isTempered == true)
             {
-                vapour_blue1.Opacity = 0;
-                vapour_blue2.Opacity = 0;
-                vapour_gray4.Opacity = 0;
+                vapour_opacity = 0.3;
+                vapour_blue1.Opacity = vapour_opacity;
+                vapour_blue2.Opacity = vapour_opacity;
+                vapour_gray4.Opacity = vapour_opacity;
+                vapour_gray_l.Opacity = vapour_opacity;
+                vapour_gray2.Opacity = vapour_opacity;
+                vapour_gray1.Opacity = vapour_opacity;
+                vapour_gray3.Opacity = vapour_opacity;
+
+                vapor_finish();
+            }
+
+            if(controller.IsComplete == true && tmp_slider_main.Value > 50 && tmp_slider_main.Value < 60)
+            {
+                vapour_opacity = 0.4;
+                vapour_blue1.Opacity = vapour_opacity;
+                vapour_blue2.Opacity = vapour_opacity;
+                vapour_gray4.Opacity = vapour_opacity;
+                vapour_gray_l.Opacity = vapour_opacity;
+                vapour_gray2.Opacity = vapour_opacity;
+                vapour_gray1.Opacity = vapour_opacity;
+                vapour_gray3.Opacity = vapour_opacity;
+
+                _isTempered = true;
             }
 
             /*
