@@ -46,7 +46,7 @@ namespace virtual_rectification
             }
         }
 
-        /*Ниже представлен вариант заполнения и опустошения перегонного куба через Rectangle и изменение его Height через раймер,
+        /*Ниже представлен вариант заполнения и опустошения перегонного куба через Rectangle и изменение его Height через таймер,
          этот вариант рабочий, но я от него отказался, так как он достаточно ресурсоёмкий и "костыльный". Я взглянул в сторону 
          метода .GotoFrame(int) у ImageBehavior, он позволяет отобразить конкретный кадр гиф-файла, там самыс можно просто выставлять
          определённый кадр "количества" смеси, взависимости от температуры и испарения, используя гиф-файл своего рода "контейнером" кадров*/
@@ -330,6 +330,7 @@ namespace virtual_rectification
                 vapour_gray2.Opacity = vapour_opacity;
                 vapour_gray1.Opacity = vapour_opacity;
                 vapour_gray3.Opacity = vapour_opacity;
+                distildone.Opacity = vapour_opacity;
 
                 _isTempered = true;
             }
@@ -344,6 +345,7 @@ namespace virtual_rectification
                 vapour_gray2.Opacity = vapour_opacity;
                 vapour_gray1.Opacity = vapour_opacity;
                 vapour_gray3.Opacity = vapour_opacity;
+                distildone.Opacity = vapour_opacity;
 
                 vapor_finish();
             }
@@ -358,6 +360,7 @@ namespace virtual_rectification
                 vapour_gray2.Opacity = vapour_opacity;
                 vapour_gray1.Opacity = vapour_opacity;
                 vapour_gray3.Opacity = vapour_opacity;
+                distildone.Opacity = vapour_opacity;
 
                 _isTempered = true;
             }

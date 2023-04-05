@@ -49,7 +49,7 @@
 
         <!--холодильник-->
         <Image x:Name="water_cold_up" gif:ImageBehavior.AnimatedSource="Resources/water_cold_up.gif" gif:ImageBehavior.AutoStart="False" Visibility="Hidden" Margin="945,59,0,0" Stretch="Fill" Height="213" VerticalAlignment="Top" HorizontalAlignment="Left" Width="13"/>
-        <Image x:Name="distildone" gif:ImageBehavior.AnimatedSource="Resources/distil_done_fr.gif"  Visibility="Hidden" Margin="929,44,0,0" Stretch="Fill" Height="238" VerticalAlignment="Top" HorizontalAlignment="Left" Width="16"/>
+        <Image x:Name="distildone" Opacity="0" gif:ImageBehavior.AnimatedSource="Resources/distil_done_fr.gif"  Visibility="Visible" Margin="929,44,0,0" Stretch="Fill" Height="238" VerticalAlignment="Top" HorizontalAlignment="Left" Width="17"/>
         <Image x:Name="water_cold_up2" gif:ImageBehavior.AnimatedSource="Resources/water_cold_up.gif" gif:ImageBehavior.AutoStart="False" Visibility="Hidden" Margin="916,59,0,0" Stretch="Fill" Height="213" VerticalAlignment="Top" HorizontalAlignment="Left" Width="13"/>
         <Image x:Name="cold_water_fr" gif:ImageBehavior.AnimatedSource="Resources/cold_water_fr.gif" gif:ImageBehavior.AutoStart="False" Visibility="Visible" Margin="957,262,0,0" HorizontalAlignment="Left" Width="83" Height="8" VerticalAlignment="Top"/>
         <Image x:Name="warm_water_fr" gif:ImageBehavior.AnimatedSource="Resources/warm_water_fr.gif" gif:ImageBehavior.AutoStart="False" Visibility="Hidden" Margin="957,59,0,0" HorizontalAlignment="Left" Width="83" Height="8" VerticalAlignment="Top"/>
