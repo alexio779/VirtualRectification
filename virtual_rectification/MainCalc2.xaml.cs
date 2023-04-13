@@ -11,7 +11,14 @@ namespace virtual_rectification
 {
     public partial class MainCalc2 : Window
     {
+        //Глобальные переменные отслеживающие состояния
+        bool hot_is_on = false;
+        bool def_water_is_on = false;
+        bool hol_water_is_on = false;
         bool _isTempered = false;
+
+
+
         //1 -й кусок кода, отвечающий за таймер
         DispatcherTimer dt = new DispatcherTimer();
         Stopwatch sw = new Stopwatch();
@@ -104,11 +111,41 @@ namespace virtual_rectification
             flegmaEvent();
         }
 
-        //функция обрабатывает нажатие на кнопку "Подать воду"
-        private void Voda_Click(object sender, RoutedEventArgs e)
+        //функция обрабатывает нажатие на кнопку "Подать воду на дефлегматор"
+        private void Def_Voda_Click(object sender, RoutedEventArgs e)
         {
-            HolodilnikWater();
-            DeflegmatorWater();
+            
+            if (def_water_is_on == false)
+            {
+                WaterDefStart();
+            }
+            else
+            {
+                WaterDefFinish();
+            }
+
+        }
+
+        void WaterDefStart()
+        {
+            def_water_is_on = true;
+
+            water_def_dock.IsEnabled = true;
+
+            def_voda_pusk.Content = "Закрыть воду на дефлегматор";
+        }
+
+        void WaterDefFinish()
+        {
+            def_water_is_on = false;
+
+            water_def_dock.IsEnabled = false;
+
+            water_def_slider.Value = 0;
+
+            DeflegmatorStopWater();
+
+            def_voda_pusk.Content = "Подать воду на дефлегматор";
         }
 
         //Функция отвечает за воду в холодильнике
@@ -135,6 +172,41 @@ namespace virtual_rectification
                     controller4.Play();
                 }
             }
+        }
+
+        private void Hol_voda_pusk_Click(object sender, RoutedEventArgs e)
+        {
+            if (hol_water_is_on == false)
+            {
+                HolWaterStart();
+            }
+            else
+            {
+                HolWaterFinish();
+            }
+        }
+
+        void HolWaterStart()
+        {
+            hol_water_is_on = true;
+
+            water_hol_dock.IsEnabled = true;
+
+            hol_voda_pusk.Content = "Закрыть воду на холодильник";
+        }
+
+        void HolWaterFinish()
+        {
+
+            water_hol_slider.Value = 0;
+
+            HolodilnikStopWater();
+
+            hol_voda_pusk.Content = "Подать воду на холодильник";
+
+            water_hol_dock.IsEnabled = false;
+
+            hol_water_is_on = false;
         }
 
         //Функция отвечает за всё, что происходит в дефлегматоре
@@ -199,7 +271,7 @@ namespace virtual_rectification
             controller0.Play();
         }
 
-        //Функция выключения воды в дефлегматоре и холодильнике
+        //Функция выключения воды в дефлегматоре
         void DeflegmatorStopWater()
         {
             //Дефлегматор
@@ -226,6 +298,31 @@ namespace virtual_rectification
             controller7.Pause();
             controller7.GotoFrame(0);
 
+        }
+
+        private void Water_def_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            DeflegmatorWater();
+
+            if(water_def_slider.Value == 0)
+            {
+                DeflegmatorStopWater();
+            }
+        }
+
+        private void Hol_water_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            HolodilnikWater();
+
+            if (water_hol_slider.Value == 0)
+            {
+                HolodilnikStopWater();
+            }
+        }
+
+        //Функция отвечает за выключение воды в холодильнике
+        void HolodilnikStopWater()
+        {
             //Холодильник
             var controller8 = ImageBehavior.GetAnimationController(cold_water_fr);
             controller8.Pause();
@@ -241,9 +338,6 @@ namespace virtual_rectification
             controller11.GotoFrame(0);
             warm_water_fr.Visibility = Visibility.Hidden;
         }
-
-        //Глобальная переменная отслеживающая состояние нагрева (включено или выключено)
-        bool hot_is_on = false;
 
         //Функция, обрабатывающая нажатие кнопки
         private void Hot_Click(object sender, RoutedEventArgs e)
@@ -296,6 +390,7 @@ namespace virtual_rectification
             vapour_gray2.Opacity = cold_op;
             vapour_gray1.Opacity = cold_op;
             vapour_gray3.Opacity = cold_op;
+            distildone.Opacity = cold_op;
 
             _isTempered = false;
             
@@ -432,6 +527,7 @@ namespace virtual_rectification
                 sw.Restart();
             }
         }
+
 
     }
 }
