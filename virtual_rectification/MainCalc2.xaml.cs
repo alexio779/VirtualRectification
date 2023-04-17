@@ -16,11 +16,13 @@ namespace virtual_rectification
         bool def_water_is_on = false;
         bool hol_water_is_on = false;
         bool _isTempered = false;
-
+        bool _TankIsFull = false;
+        bool fl_In_Stock = true;
 
 
         //1 -й кусок кода, отвечающий за таймер
         DispatcherTimer dt = new DispatcherTimer();
+
         Stopwatch sw = new Stopwatch();
         string currentTime = string.Empty;
         //-------------------------------------
@@ -36,7 +38,6 @@ namespace virtual_rectification
             dt.Start();
             //------------------------------------
 
-            
         }
 
         //3-й кусок кода, отвечающий за таймер (событие "тика")
@@ -51,64 +52,20 @@ namespace virtual_rectification
                 //--------------------------------------------------------------
 
             }
-        }
 
-        /*Ниже представлен вариант заполнения и опустошения перегонного куба через Rectangle и изменение его Height через таймер,
-         этот вариант рабочий, но я от него отказался, так как он достаточно ресурсоёмкий и "костыльный". Я взглянул в сторону 
-         метода .GotoFrame(int) у ImageBehavior, он позволяет отобразить конкретный кадр гиф-файла, там самыс можно просто выставлять
-         определённый кадр "количества" смеси, взависимости от температуры и испарения, используя гиф-файл своего рода "контейнером" кадров*/
-         //
-        /*
-
-    //Функция обрабатывает нажатие кнопки "Залить смесь"
-
-
-    private void braga_Click(object sender, RoutedEventArgs e)
-    {
-        //создадим ещё один таймер
-        DispatcherTimer dt2 = new DispatcherTimer();
-        dt2.Tick += new EventHandler(dt_Tick2);
-        dt2.Interval = new TimeSpan(0, 0, 0, 0, 75);
-        dt2.Start();
-
-    }
-
-
-    private void dt_Tick2(object sender, EventArgs e)
-    {
-        //я не знаю как сделать иначе, оно не работает с for и while ┐(￣～￣)┌
-        if (braga_line_0.Height != 111)
-        {
-            braga_line_0.Height++;
-
-            if (braga_line_0.Height == 111)
+            if(_TankIsFull == true && fl_In_Stock==true)
             {
-                MessageBox.Show("Бак полон", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                fl_dock.IsEnabled = true;
             }
         }
-
-        //фрагмен ниже должен находитьтя в функции испарения браги
-
-        if (braga_line_0.Height != 1 && tmp_slider_main.Value == 70)
-        {
-            braga_line_0.Height--;
-
-            if (braga_line_0.Height == 1)
-            {
-                MessageBox.Show("Бак опустошён", "", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
-    }
-
-       */
 
         //Новая кнопка "Залить смесь"
         private void Braga_btn_Click(object sender, RoutedEventArgs e)
         {
             var controller1 = ImageBehavior.GetAnimationController(braga);
             controller1.Play();
-            flegmaEvent();
+
+            _TankIsFull = true;
         }
 
         //функция обрабатывает нажатие на кнопку "Подать воду на дефлегматор"
@@ -126,6 +83,7 @@ namespace virtual_rectification
 
         }
 
+        //Подача воды в дефлегматор
         void WaterDefStart()
         {
             def_water_is_on = true;
@@ -135,6 +93,7 @@ namespace virtual_rectification
             def_voda_pusk.Content = "Закрыть воду на дефлегматор";
         }
 
+        //Остановка воды в дефлегматоре
         void WaterDefFinish()
         {
             def_water_is_on = false;
@@ -174,6 +133,7 @@ namespace virtual_rectification
             }
         }
 
+        //Обработчик нажатия кнопки подычи воды на холодильник
         private void Hol_voda_pusk_Click(object sender, RoutedEventArgs e)
         {
             if (hol_water_is_on == false)
@@ -185,7 +145,8 @@ namespace virtual_rectification
                 HolWaterFinish();
             }
         }
-
+        
+        //Подача воды в холодильник
         void HolWaterStart()
         {
             hol_water_is_on = true;
@@ -195,6 +156,7 @@ namespace virtual_rectification
             hol_voda_pusk.Content = "Закрыть воду на холодильник";
         }
 
+        //Остановка воды в холодильнике
         void HolWaterFinish()
         {
 
@@ -264,13 +226,6 @@ namespace virtual_rectification
             }
         }
 
-        //Функция отвечает за флегму
-        void flegmaEvent()
-        {
-            var controller0 = ImageBehavior.GetAnimationController(flegma_s);
-            controller0.Play();
-        }
-
         //Функция выключения воды в дефлегматоре
         void DeflegmatorStopWater()
         {
@@ -300,6 +255,7 @@ namespace virtual_rectification
 
         }
 
+        //Слайдер воды дефлегматора
         private void Water_def_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             DeflegmatorWater();
@@ -310,6 +266,7 @@ namespace virtual_rectification
             }
         }
 
+        //Слайдер воды холодильника
         private void Hol_water_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             HolodilnikWater();
@@ -339,6 +296,48 @@ namespace virtual_rectification
             warm_water_fr.Visibility = Visibility.Hidden;
         }
 
+        //Слайдер подачи флегмы
+        private void Fl_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (fl_In_Stock == true && tmp_slider_main.Value > 50)
+            {
+                flegma_r.Visibility = Visibility.Visible;
+                var controller1 = ImageBehavior.GetAnimationController(flegma_r);
+                controller1.Play();
+                if (fl_slider.Value == 0)
+                {
+                    controller1.Pause();
+                    flegma_r.Visibility = Visibility.Hidden;
+                }
+            }
+        }
+
+        //Сброс дефлегматора
+        void DeflegmatorReset()
+        {
+            flegma_r.Visibility = Visibility.Hidden;
+            var controller1 = ImageBehavior.GetAnimationController(flegma_r);
+            controller1.Pause();
+            controller1.GotoFrame(0);
+            flegma_s.Visibility = Visibility.Hidden;
+            var controller2 = ImageBehavior.GetAnimationController(flegma_s);
+            controller2.Pause();
+            controller2.GotoFrame(0);
+
+            fl_slider.Value = 0;
+
+        }
+
+        //Сброс куба
+        void TankReset()
+        {
+            var controller1 = ImageBehavior.GetAnimationController(braga);
+            controller1.Pause();
+            controller1.GotoFrame(0);
+
+            _TankIsFull = false;
+        }
+        
         //Функция, обрабатывающая нажатие кнопки
         private void Hot_Click(object sender, RoutedEventArgs e)
         {
@@ -378,8 +377,8 @@ namespace virtual_rectification
             tmp_slider_main.Value = 0;
         }
 
-        //Это функция отвечет за исчезновение пара
-        async void vapor_finish()
+        //Это функция отвечет за исчезновение пара плавно
+        async void vapor_finish_smooth()
         {
             await Task.Delay(2000);
             double cold_op = 0;
@@ -394,6 +393,23 @@ namespace virtual_rectification
 
             _isTempered = false;
             
+        }
+
+        //Исчезновение пара моментально
+        void vapor_finish()
+        {
+
+            double cold_op = 0;
+            vapour_blue1.Opacity = cold_op;
+            vapour_blue2.Opacity = cold_op;
+            vapour_gray4.Opacity = cold_op;
+            vapour_gray_l.Opacity = cold_op;
+            vapour_gray2.Opacity = cold_op;
+            vapour_gray1.Opacity = cold_op;
+            vapour_gray3.Opacity = cold_op;
+            distildone.Opacity = cold_op;
+
+            _isTempered = false;
         }
 
         //Отслеживание значения слайдера температуры нагрева и спавним пар
@@ -442,7 +458,7 @@ namespace virtual_rectification
                 vapour_gray3.Opacity = vapour_opacity;
                 distildone.Opacity = vapour_opacity;
 
-                vapor_finish();
+                vapor_finish_smooth();
             }
 
             if(controller.IsComplete == true && tmp_slider_main.Value > 50 && tmp_slider_main.Value < 60)
@@ -523,11 +539,14 @@ namespace virtual_rectification
             {
                 //Выбор "ДА"
                 HotFinish();
-                DeflegmatorStopWater();
+                WaterDefFinish();
+                vapor_finish();
+                HolWaterFinish();
                 sw.Restart();
+                DeflegmatorReset();
+                TankReset();
             }
         }
-
 
     }
 }

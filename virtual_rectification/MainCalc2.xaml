@@ -69,13 +69,13 @@
             </Rectangle.RenderTransform>
         </Rectangle>
 
-        <DockPanel x:Name="water_hol_dock"  IsEnabled="False" VerticalAlignment="Top" Margin="26,258,0,0" Height="28" HorizontalAlignment="Left" Width="177">
+        <DockPanel x:Name="water_hol_dock"  IsEnabled="False" VerticalAlignment="Top" Margin="26,256,0,0" Height="28" HorizontalAlignment="Left" Width="177">
             <TextBox x:Name="water_hol_text" Text="{Binding ElementName=water_hol_slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" DockPanel.Dock="Right" TextAlignment="Right" Width="39" />
             <Slider x:Name="water_hol_slider" Minimum="0" Maximum="100" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="Hol_water_slider_ValueChanged"/>
         </DockPanel>
 
         <!--Дефлегматор-->
-        <Image x:Name="flegma_s" gif:ImageBehavior.AnimatedSource="Resources/flegma_s.gif" Visibility="Hidden" gif:ImageBehavior.AutoStart="False" Margin="503,176,0,0" Stretch="Fill" Height="98" VerticalAlignment="Top" HorizontalAlignment="Left" Width="101"/>
+        <Image x:Name="flegma_s" gif:ImageBehavior.AnimatedSource="Resources/flegma_s.gif" Visibility="Visible" gif:ImageBehavior.AutoStart="False" Margin="503,176,0,0" Stretch="Fill" Height="98" VerticalAlignment="Top" HorizontalAlignment="Left" Width="101"/>
         <Image x:Name="vapour_gray2" Opacity="0" gif:ImageBehavior.AnimatedSource="/Resources/vapour_gray.gif" Visibility="Visible" Margin="641,-68,0,0" Stretch="Fill" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left" Width="24" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
@@ -98,7 +98,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="flegma_r" gif:ImageBehavior.AnimatedSource="Resources/flegma_r.gif" Visibility="Hidden" Margin="402,250,0,0" Stretch="Fill" Height="3" VerticalAlignment="Top" HorizontalAlignment="Left" Width="101" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="flegma_r" gif:ImageBehavior.AnimatedSource="Resources/flegma_r.gif" Visibility="Hidden" gif:ImageBehavior.AutoStart="False" Margin="402,250,0,0" Stretch="Fill" Height="3" VerticalAlignment="Top" HorizontalAlignment="Left" Width="101" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -109,7 +109,7 @@
             </Image.RenderTransform>
         </Image>
 
-        <DockPanel x:Name="water_def_dock"  IsEnabled="False" VerticalAlignment="Top" Margin="26,168,0,0" Height="28" HorizontalAlignment="Left" Width="177">
+        <DockPanel x:Name="water_def_dock"  IsEnabled="False" VerticalAlignment="Top" Margin="26,170,0,0" Height="28" HorizontalAlignment="Left" Width="177">
             <TextBox x:Name="water_def_text" Text="{Binding ElementName=water_def_slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" DockPanel.Dock="Right" TextAlignment="Right" Width="39" />
             <Slider x:Name="water_def_slider" Minimum="0" Maximum="100" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="Water_def_slider_ValueChanged"/>
         </DockPanel>
@@ -145,25 +145,33 @@
         </Image>
 
         <!--Капли-->
-        <Image x:Name="drops1" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" Margin="385,272,0,0" Stretch="Uniform" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
-        <Image x:Name="drops2" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" Margin="370,272,0,0" Stretch="Uniform" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
-        <Image x:Name="drops3" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" Margin="355,272,0,0" Stretch="Uniform" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
-        <Image x:Name="drops4" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" Margin="535,97,0,0" Stretch="Uniform" Height="79" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
-        <Image x:Name="drops5" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" Margin="559,97,0,0" Stretch="Uniform" Height="79" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+        <Image x:Name="drops1" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" gif:ImageBehavior.AutoStart="False" Margin="385,272,0,0" Stretch="Uniform" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+        <Image x:Name="drops2" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" gif:ImageBehavior.AutoStart="False" Margin="370,272,0,0" Stretch="Uniform" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+        <Image x:Name="drops3" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" gif:ImageBehavior.AutoStart="False" Margin="355,272,0,0" Stretch="Uniform" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+        <Image x:Name="drops4" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" gif:ImageBehavior.AutoStart="False" Margin="535,97,0,0" Stretch="Uniform" Height="79" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
 
         <!--Основная схема-->
         <Image Source="Resources/REK_3.2_obr2_new_2.png" Stretch="Uniform" Margin="237,20,0,0" Height="643" VerticalAlignment="Top" HorizontalAlignment="Left" Width="806"/>
         <Image x:Name="vapour_gray1" Opacity="0" gif:ImageBehavior.AnimatedSource="Resources/vapour_gray.gif" Visibility="Visible" Margin="520,86,0,0" Stretch="None" Height="90" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82"/>
 
-        <Image x:Name="drops6" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif"  Visibility="Hidden" Margin="919,327,0,0" Stretch="Uniform" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+        <Image x:Name="drops6" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif"  Visibility="Visible" Margin="919,327,0,0" Stretch="Uniform" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
         <Label x:Name="label" Content="ЛАТР" HorizontalAlignment="Left" Margin="333,629,0,0" VerticalAlignment="Top" Width="40"/>
         <Label Content="Панель управления" Margin="0,18,0,0" HorizontalContentAlignment="Center" FontSize="18" FontFamily="Arial" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="31" Width="235"/>
-        <DockPanel x:Name="tmp_slider"  IsEnabled="False" VerticalAlignment="Top" Margin="26,349,0,0" Height="28" HorizontalAlignment="Left" Width="177">
+        <!--Управление температурой-->
+        <DockPanel x:Name="tmp_slider"  IsEnabled="False" VerticalAlignment="Top" Margin="26,345,0,0" Height="28" HorizontalAlignment="Left" Width="177">
             <TextBox x:Name="tmp_text" Text="{Binding ElementName=tmp_slider_main, Path=Value, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" DockPanel.Dock="Right" TextAlignment="Right" Width="39" />
             <Slider x:Name="tmp_slider_main" Minimum="0" Maximum="100" TickPlacement="None" TickFrequency="0.1" IsSnapToTickEnabled="True" ValueChanged="tmp_slider_main_ValueChanged"/>
         </DockPanel>
-        
-        
+
+        <!--Управление флегмой-->
+        <DockPanel x:Name="fl_dock"  IsEnabled="False" VerticalAlignment="Top" Margin="26,421,0,0" Height="28" HorizontalAlignment="Left" Width="177">
+            <TextBox x:Name="fl_text" Text="{Binding ElementName=fl_slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" DockPanel.Dock="Right" TextAlignment="Right" Width="39" />
+            <Slider x:Name="fl_slider" Minimum="0" Maximum="100" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="Fl_slider_ValueChanged"/>
+        </DockPanel>
+
+        <Label Content="Подача флегмы" Margin="26,389,0,0" HorizontalContentAlignment="Center" FontSize="14" FontFamily="Arial" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="177"/>
+
+
 
         <!--Нагревающий элемент-->
         <Rectangle x:Name="rec1" HorizontalAlignment="Left" Height="10" Margin="275,562,0,0" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.5,0.5">
@@ -191,14 +199,19 @@
 
 
         <!--кнопки панели управления-->
-        <Button x:Name="hot" HorizontalContentAlignment="Center" Content="Включить нагрев" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="162" Click="Hot_Click" Margin="34,304,0,0"/>
-        <Button x:Name="def_voda_pusk" Content="Подать воду на дефлегматор" FontSize="11" Margin="34,121,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="162" Click="Def_Voda_Click"/>
-        <Button x:Name="hol_voda_pusk" Content="Подать воду на холодильник" FontSize="11" Margin="34,211,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="162" Click="Hol_voda_pusk_Click"/>
-        <Button x:Name="braga_btn" Content="Залить смесь" FontSize="14" HorizontalAlignment="Left" Margin="34,63,0,0" VerticalAlignment="Top" Height="36" Width="162" Click="Braga_btn_Click"></Button>
-        <Button x:Name="exit_btn" Content="Завершить работу" Margin="1090,627,0,0" Width="162" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Exit_btn_Click"/>
-        <Button x:Name="restart" Content="Сбросить всё" Margin="1090,567,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="162" Click="Restart_Click"/>
+        <Button x:Name="hot" HorizontalContentAlignment="Center" Content="Включить нагрев" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="177" Click="Hot_Click" Margin="26,304,0,0"/>
+        <Button x:Name="def_voda_pusk" Content="Подать воду на дефлегматор" FontSize="11" Margin="26,129,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="177" Click="Def_Voda_Click"/>
+        <Button x:Name="hol_voda_pusk" Content="Подать воду на холодильник" FontSize="11" Margin="26,215,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="177" Click="Hol_voda_pusk_Click"/>
+        <Button x:Name="braga_btn" Content="Залить смесь" FontSize="14" HorizontalAlignment="Left" Margin="26,68,0,0" VerticalAlignment="Top" Height="36" Width="177" Click="Braga_btn_Click"></Button>
+        <Button x:Name="exit_btn" Content="Завершить работу" Margin="1071,627,0,0" Width="177" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Exit_btn_Click"/>
+        <Button x:Name="restart" Content="Сбросить всё" Margin="1071,567,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="177" Click="Restart_Click"/>
+
+
         <!--Таймер-->
         <Label x:Name="time_label" Margin="246,20,0,0" VerticalContentAlignment="Center" Height="49" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134"></Label>
+
+        <!--тоже капли в дефлегматоре, но поверз фона-->
+        <Image x:Name="drops5" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" gif:ImageBehavior.AutoStart="False" Margin="559,97,0,0" Stretch="Uniform" Height="79" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
 
     </Grid>
 </Window>
