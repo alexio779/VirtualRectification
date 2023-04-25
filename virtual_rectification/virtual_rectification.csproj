@@ -253,5 +253,8 @@
   <ItemGroup>
     <Resource Include="logo3.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\drops_l.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

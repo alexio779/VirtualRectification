@@ -18,12 +18,12 @@ namespace virtual_rectification
         bool _isTempered = false;
         bool _TankIsFull = false;
         bool fl_In_Stock = true;
-
-
+        int seconds_now = 0;
         //1 -й кусок кода, отвечающий за таймер
         DispatcherTimer dt = new DispatcherTimer();
 
         Stopwatch sw = new Stopwatch();
+
         string currentTime = string.Empty;
         //-------------------------------------
 
@@ -37,7 +37,6 @@ namespace virtual_rectification
             sw.Start();
             dt.Start();
             //------------------------------------
-
         }
 
         //3-й кусок кода, отвечающий за таймер (событие "тика")
@@ -49,8 +48,10 @@ namespace virtual_rectification
                 currentTime = String.Format("{0:00}:{1:00}:{2:00}",
                 ts.Hours, ts.Minutes, ts.Seconds);
                 time_label.Content = currentTime;
-                //--------------------------------------------------------------
 
+                
+                //--------------------------------------------------------------
+                
             }
 
             if(_TankIsFull == true && fl_In_Stock==true)
@@ -302,13 +303,42 @@ namespace virtual_rectification
             if (fl_In_Stock == true && tmp_slider_main.Value > 50)
             {
                 flegma_r.Visibility = Visibility.Visible;
+                drops1.Visibility = Visibility.Visible;
+                drops2.Visibility = Visibility.Visible;
+                drops3.Visibility = Visibility.Visible;
+                drops4.Visibility = Visibility.Visible;
+                drops5.Visibility = Visibility.Visible;
+
                 var controller1 = ImageBehavior.GetAnimationController(flegma_r);
+                var controller2 = ImageBehavior.GetAnimationController(drops1);
+                var controller3 = ImageBehavior.GetAnimationController(drops2);
+                var controller4 = ImageBehavior.GetAnimationController(drops3);
+                var controller5 = ImageBehavior.GetAnimationController(drops4);
+                var controller6 = ImageBehavior.GetAnimationController(drops5);
+
+                controller2.Play();
+                controller3.Play();
+                controller4.Play();
+                controller5.Play();
+                controller6.Play();
+
                 controller1.Play();
                 if (fl_slider.Value == 0)
                 {
                     controller1.Pause();
                     flegma_r.Visibility = Visibility.Hidden;
+                    drops1.Visibility = Visibility.Visible;
+                    drops2.Visibility = Visibility.Visible;
+                    drops3.Visibility = Visibility.Visible;
+                    drops4.Visibility = Visibility.Visible;
+                    drops5.Visibility = Visibility.Visible;
+                    controller2.Pause();
+                    controller3.Pause();
+                    controller4.Pause();
+                    controller5.Pause();
+                    controller6.Pause();
                 }
+                
             }
         }
 
@@ -390,6 +420,7 @@ namespace virtual_rectification
             vapour_gray1.Opacity = cold_op;
             vapour_gray3.Opacity = cold_op;
             distildone.Opacity = cold_op;
+            distil_line.Visibility = Visibility.Hidden;
 
             _isTempered = false;
             
@@ -442,6 +473,29 @@ namespace virtual_rectification
                 vapour_gray1.Opacity = vapour_opacity;
                 vapour_gray3.Opacity = vapour_opacity;
                 distildone.Opacity = vapour_opacity;
+                distil_line.Visibility = Visibility.Visible;
+
+                drops6.Visibility = Visibility.Visible;
+                var controller2 = ImageBehavior.GetAnimationController(drops6);
+                controller2.Play();
+
+                
+                var controller3 = ImageBehavior.GetAnimationController(flegma_s);
+                ImageBehavior.SetAnimationSpeedRatio(flegma_s, 0.5);
+                controller3.Play();
+                
+                //временно
+                var controller4 = ImageBehavior.GetAnimationController(distil_g);
+                var controller5 = ImageBehavior.GetAnimationController(bubbles1);
+                var controller6 = ImageBehavior.GetAnimationController(bubbles2);
+                ImageBehavior.SetAnimationSpeedRatio(distil_g, 0.5);
+                controller4.Play();
+
+                bubbles1.Visibility = Visibility.Visible;
+                controller5.Play();
+                
+                bubbles2.Visibility = Visibility.Visible;
+                controller6.Play();
 
                 _isTempered = true;
             }
@@ -458,6 +512,17 @@ namespace virtual_rectification
                 vapour_gray3.Opacity = vapour_opacity;
                 distildone.Opacity = vapour_opacity;
 
+                drops6.Visibility = Visibility.Hidden;
+                var controller2 = ImageBehavior.GetAnimationController(drops6);
+                controller2.Pause();
+                var controller3 = ImageBehavior.GetAnimationController(flegma_s);
+                controller3.Pause();
+
+                //временно
+                var controller4 = ImageBehavior.GetAnimationController(distil_g);
+                controller4.Pause();
+                controller4.GotoFrame(0);
+
                 vapor_finish_smooth();
             }
 
@@ -473,40 +538,24 @@ namespace virtual_rectification
                 vapour_gray3.Opacity = vapour_opacity;
                 distildone.Opacity = vapour_opacity;
 
+                drops6.Visibility = Visibility.Visible;
+                var controller2 = ImageBehavior.GetAnimationController(drops6);
+                controller2.Play();
+
+                //временно
+                var controller3 = ImageBehavior.GetAnimationController(flegma_s);
+                controller3.Play();
+                ImageBehavior.SetAnimationSpeedRatio(flegma_s, 0.5);
+
+                var controller4 = ImageBehavior.GetAnimationController(distil_g);
+                ImageBehavior.SetAnimationSpeedRatio(distil_g, 0.5);
+                controller4.Play();
+                //controller4.GotoFrame(0);
+
+
                 _isTempered = true;
             }
 
-            /*
-            //ниже приведёт ещё один вариант реализации "нагрева", но я от него отказался, так как он муторный и менее наглядный
-            //MessageBox.Show("DEBUG#01");
-
-            
-            if (tmp_slider_main.Value >= 1 && tmp_slider_main.Value < 10)
-            {
-                //MessageBox.Show("DEBUG#011");
-
-                //Color color = (Color)ColorConverter.ConvertFromString("#BF9B9B");
-                //var brush1 = (SolidColorBrush)new BrushConverter().ConvertFromString("#BF9B9B");
-
-                //Меняем прозрачность цвета, в зависимости от выставленной температуры
-
-                //brush1.Opacity = tmp_slider_main.Value;
-
-                //SolidColorBrush MyBrush1 = brush;
-
-                rec1.Fill = brush1;
-                rec2.Fill = brush1;
-                rec3.Fill = brush1;
-            }
-
-            if(tmp_slider_main.Value >= 25 && tmp_slider_main.Value < 50)
-            {
-                MessageBox.Show("DEBUG#02");
-                //rec1.Fill = Brushes.;
-                rec2.Fill = Brushes.RosyBrown;
-                rec3.Fill = Brushes.RosyBrown;
-            }
-            */
         }
 
         //Кнопка выхода

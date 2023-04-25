@@ -55,10 +55,10 @@
         <Image x:Name="warm_water_fr" gif:ImageBehavior.AnimatedSource="Resources/warm_water_fr.gif" gif:ImageBehavior.AutoStart="False" Visibility="Hidden" Margin="957,59,0,0" HorizontalAlignment="Left" Width="83" Height="8" VerticalAlignment="Top"/>
 
         <!--готовый продукт-->
-        <Image x:Name="bubbles1" gif:ImageBehavior.AnimatedSource="Resources/bubbles.gif" Margin="991,421,0,0" Stretch="Fill" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="8"/>
-        <Image x:Name="bubbles2" gif:ImageBehavior.AnimatedSource="/Resources/bubbles.gif" Margin="973,421,0,0" Stretch="Fill" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="8"/>
-        <Image x:Name="distil_g" gif:ImageBehavior.AnimatedSource="Resources/distil_g.gif" gif:ImageBehavior.AutoStart="False" Margin="867,410,0,0" Stretch="Fill" Height="85" VerticalAlignment="Top" HorizontalAlignment="Left" Width="101"/>
-        <Rectangle x:Name="distil_line" Width="49" Height="1" Margin="910,304,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Fill="Blue">
+        <Image x:Name="bubbles1" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/bubbles.gif" Margin="991,421,0,0" Stretch="Fill" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="8"/>
+        <Image x:Name="bubbles2" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="/Resources/bubbles.gif" Margin="973,421,0,0" Stretch="Fill" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="8"/>
+        <Image x:Name="distil_g" gif:ImageBehavior.AnimatedSource="Resources/distil_g.gif" gif:ImageBehavior.AutoStart="False" Margin="868,399,0,0" Stretch="Fill" Height="101" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100"/>
+        <Rectangle x:Name="distil_line" Width="49" Height="1" Visibility="Hidden" Margin="910,304,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Fill="Blue">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -154,7 +154,7 @@
         <Image Source="Resources/REK_3.2_obr2_new_2.png" Stretch="Uniform" Margin="237,20,0,0" Height="643" VerticalAlignment="Top" HorizontalAlignment="Left" Width="806"/>
         <Image x:Name="vapour_gray1" Opacity="0" gif:ImageBehavior.AnimatedSource="Resources/vapour_gray.gif" Visibility="Visible" Margin="520,86,0,0" Stretch="None" Height="90" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82"/>
 
-        <Image x:Name="drops6" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif"  Visibility="Visible" Margin="919,327,0,0" Stretch="Uniform" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+        <Image x:Name="drops6" gif:ImageBehavior.AnimatedSource="/Resources/drops_l.gif"  Visibility="Hidden" Margin="919,327,0,0" Stretch="Uniform" Height="165" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
         <Label x:Name="label" Content="ЛАТР" HorizontalAlignment="Left" Margin="333,629,0,0" VerticalAlignment="Top" Width="40"/>
         <Label Content="Панель управления" Margin="0,18,0,0" HorizontalContentAlignment="Center" FontSize="18" FontFamily="Arial" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Height="31" Width="235"/>
         <!--Управление температурой-->
@@ -208,7 +208,7 @@
 
 
         <!--Таймер-->
-        <Label x:Name="time_label" Margin="246,20,0,0" VerticalContentAlignment="Center" Height="49" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134"></Label>
+        <Label x:Name="time_label" Visibility="Hidden" Margin="246,20,0,0" VerticalContentAlignment="Center" Height="49" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134"></Label>
 
         <!--тоже капли в дефлегматоре, но поверз фона-->
         <Image x:Name="drops5" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" gif:ImageBehavior.AutoStart="False" Margin="559,97,0,0" Stretch="Uniform" Height="79" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
