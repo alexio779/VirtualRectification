@@ -208,7 +208,7 @@
 
 
         <!--Таймер-->
-        <Label x:Name="time_label" Visibility="Hidden" Margin="246,20,0,0" VerticalContentAlignment="Center" Height="49" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134"></Label>
+        <Label x:Name="time_label" Visibility="Visible" Margin="246,20,0,0" VerticalContentAlignment="Center" Height="49" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134"></Label>
 
         <!--тоже капли в дефлегматоре, но поверз фона-->
         <Image x:Name="drops5" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" gif:ImageBehavior.AutoStart="False" Margin="559,97,0,0" Stretch="Uniform" Height="79" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>

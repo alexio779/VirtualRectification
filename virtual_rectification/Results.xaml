@@ -6,7 +6,7 @@
         xmlns:ScottPlot="clr-namespace:ScottPlot;assembly=ScottPlot.WPF"
         xmlns:local="clr-namespace:virtual_rectification"
         mc:Ignorable="d"
-        Title="РЕЗУЛЬТАТ" Height="500" Width="900"
+        Title="РЕЗУЛЬТАТ" Height="720" Width="1280"
         AllowsTransparency="False" Background="Transparent"
         WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize">
     
@@ -20,7 +20,7 @@
                 </LinearGradientBrush>
             </Border.Background>
 
-            <ScottPlot:WpfPlot x:Name="Chart" Margin="10,10,221.6,10.4" />
+            <ScottPlot:WpfPlot x:Name="Chart" Margin="10,57,581.6,61.4"/>
         </Border>
         
         

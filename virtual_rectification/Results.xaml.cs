@@ -16,12 +16,14 @@ namespace virtual_rectification
 
         void ChartBuilder()
         {
-            double[] dataX = new double[] { 1, 3, 6, 10, 30 };
-            double[] dataY = new double[] { 1, 4, 9, 16, 35 };
-            double[] dataX2 = new double[] { 1, 5, 11, 18, 30 };
-            double[] dataY2 = new double[] { 1, 6, 10, 15, 40 };
-            Chart.Plot.AddScatter(dataX, dataY);
-            Chart.Plot.AddScatter(dataX2, dataY2);
+            Chart.Plot.XAxis.Label("Концентрация жидкости, % об.");
+            Chart.Plot.YAxis.Label("Концентрация пара, % об.");
+
+            double[] dataX = new double[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+            double[] dataY = new double[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+
+            Chart.Plot.AddLine(0,0, 100, 100);
+
             Chart.Refresh();
         }
 

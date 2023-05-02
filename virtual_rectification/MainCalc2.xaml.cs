@@ -306,8 +306,6 @@ namespace virtual_rectification
                 drops1.Visibility = Visibility.Visible;
                 drops2.Visibility = Visibility.Visible;
                 drops3.Visibility = Visibility.Visible;
-                drops4.Visibility = Visibility.Visible;
-                drops5.Visibility = Visibility.Visible;
 
                 var controller1 = ImageBehavior.GetAnimationController(flegma_r);
                 var controller2 = ImageBehavior.GetAnimationController(drops1);
@@ -316,13 +314,11 @@ namespace virtual_rectification
                 var controller5 = ImageBehavior.GetAnimationController(drops4);
                 var controller6 = ImageBehavior.GetAnimationController(drops5);
 
+                controller1.Play();
                 controller2.Play();
                 controller3.Play();
                 controller4.Play();
-                controller5.Play();
-                controller6.Play();
-
-                controller1.Play();
+                
                 if (fl_slider.Value == 0)
                 {
                     controller1.Pause();
@@ -476,28 +472,18 @@ namespace virtual_rectification
                 distil_line.Visibility = Visibility.Visible;
 
                 drops6.Visibility = Visibility.Visible;
-                var controller2 = ImageBehavior.GetAnimationController(drops6);
+                var controller1 = ImageBehavior.GetAnimationController(drops6);
+                controller1.Play();
+
+                drops4.Visibility = Visibility.Visible;
+                var controller2 = ImageBehavior.GetAnimationController(drops4);
                 controller2.Play();
 
-                
-                var controller3 = ImageBehavior.GetAnimationController(flegma_s);
-                ImageBehavior.SetAnimationSpeedRatio(flegma_s, 0.5);
+                drops5.Visibility = Visibility.Visible;
+                var controller3 = ImageBehavior.GetAnimationController(drops5);
                 controller3.Play();
-                
-                //временно
-                var controller4 = ImageBehavior.GetAnimationController(distil_g);
-                var controller5 = ImageBehavior.GetAnimationController(bubbles1);
-                var controller6 = ImageBehavior.GetAnimationController(bubbles2);
-                ImageBehavior.SetAnimationSpeedRatio(distil_g, 0.5);
-                controller4.Play();
 
-                bubbles1.Visibility = Visibility.Visible;
-                controller5.Play();
-                
-                bubbles2.Visibility = Visibility.Visible;
-                controller6.Play();
-
-                _isTempered = true;
+                BubblesAndFlegma();
             }
 
             if (controller.IsComplete == true && tmp_slider_main.Value < 50 && _isTempered == true)
@@ -518,11 +504,6 @@ namespace virtual_rectification
                 var controller3 = ImageBehavior.GetAnimationController(flegma_s);
                 controller3.Pause();
 
-                //временно
-                var controller4 = ImageBehavior.GetAnimationController(distil_g);
-                controller4.Pause();
-                controller4.GotoFrame(0);
-
                 vapor_finish_smooth();
             }
 
@@ -542,20 +523,80 @@ namespace virtual_rectification
                 var controller2 = ImageBehavior.GetAnimationController(drops6);
                 controller2.Play();
 
-                //временно
-                var controller3 = ImageBehavior.GetAnimationController(flegma_s);
-                controller3.Play();
-                ImageBehavior.SetAnimationSpeedRatio(flegma_s, 0.5);
-
-                var controller4 = ImageBehavior.GetAnimationController(distil_g);
-                ImageBehavior.SetAnimationSpeedRatio(distil_g, 0.5);
-                controller4.Play();
-                //controller4.GotoFrame(0);
-
-
-                _isTempered = true;
+                BubblesAndFlegma();
             }
 
+        }
+
+        //Анимация деталей
+        void BubblesAndFlegma()
+        {
+            //временно
+            var controller1 = ImageBehavior.GetAnimationController(distil_g);
+            var controller2 = ImageBehavior.GetAnimationController(bubbles1);
+            var controller3 = ImageBehavior.GetAnimationController(bubbles2);
+            distil_g.Visibility = Visibility.Visible;
+            ImageBehavior.SetAnimationSpeedRatio(distil_g, 0.1);
+            controller1.Play();
+
+            bubbles1.Visibility = Visibility.Visible;
+            controller2.Play();
+
+            bubbles2.Visibility = Visibility.Visible;
+            controller3.Play();
+
+            flegma_s.Visibility = Visibility.Visible;
+            var controller4 = ImageBehavior.GetAnimationController(flegma_s);
+            controller4.Play();
+            ImageBehavior.SetAnimationSpeedRatio(flegma_s, 0.25);
+
+            _isTempered = true;
+        }
+
+        //Сброс капель
+        void DropsReset()
+        {
+            var controller1 = ImageBehavior.GetAnimationController(drops1);
+            controller1.Pause();
+            controller1.GotoFrame(0);
+            drops1.Visibility = Visibility.Hidden;
+            var controller2 = ImageBehavior.GetAnimationController(drops2);
+            controller2.Pause();
+            controller2.GotoFrame(0);
+            drops2.Visibility = Visibility.Hidden;
+            var controller3 = ImageBehavior.GetAnimationController(drops3);
+            controller3.Pause();
+            controller3.GotoFrame(0);
+            drops3.Visibility = Visibility.Hidden;
+            var controller4 = ImageBehavior.GetAnimationController(drops4);
+            controller4.Pause();
+            controller4.GotoFrame(0);
+            drops4.Visibility = Visibility.Hidden;
+            var controller5 = ImageBehavior.GetAnimationController(drops5);
+            controller5.Pause();
+            controller5.GotoFrame(0);
+            drops5.Visibility = Visibility.Hidden;
+            var controller6 = ImageBehavior.GetAnimationController(drops6);
+            controller6.Pause();
+            controller6.GotoFrame(0);
+            drops6.Visibility = Visibility.Hidden;
+        }
+
+        //Сброс остальных деталей
+        void DetailsReset()
+        {
+            distil_line.Visibility = Visibility.Hidden;
+            var controller1 = ImageBehavior.GetAnimationController(bubbles1);
+            controller1.Pause();
+            controller1.GotoFrame(0);
+            var controller2 = ImageBehavior.GetAnimationController(bubbles2);
+            controller2.Pause();
+            controller2.GotoFrame(0);
+
+            var controller3 = ImageBehavior.GetAnimationController(distil_g);
+            controller3.Pause();
+            controller3.GotoFrame(0);
+            distil_g.Visibility = Visibility.Hidden;
         }
 
         //Кнопка выхода
@@ -594,8 +635,9 @@ namespace virtual_rectification
                 sw.Restart();
                 DeflegmatorReset();
                 TankReset();
+                DropsReset();
+                DetailsReset();
             }
         }
-
     }
 }
