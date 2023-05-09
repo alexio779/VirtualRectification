@@ -19,6 +19,7 @@ namespace virtual_rectification
         bool _TankIsFull = false;
         bool fl_In_Stock = true;
         int seconds_now = 0;
+
         //1 -й кусок кода, отвечающий за таймер
         DispatcherTimer dt = new DispatcherTimer();
 
