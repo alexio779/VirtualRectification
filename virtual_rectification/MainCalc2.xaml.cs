@@ -33,7 +33,7 @@ namespace virtual_rectification
 
             //2-й кусок кода, отвечающий за таймер
             dt.Tick += new EventHandler(dt_Tick);
-            dt.Interval = new TimeSpan(0, 0, 0, 0, 1);
+            dt.Interval = new TimeSpan(0, 0, 0, 1, 0);
             sw.Start();
             dt.Start();
             //------------------------------------
@@ -49,12 +49,23 @@ namespace virtual_rectification
                 ts.Hours, ts.Minutes, ts.Seconds);
                 time_label.Content = currentTime;
 
-                
+
                 //--------------------------------------------------------------
-                
+
+                /*
+                var controller1 = ImageBehavior.GetAnimationController(braga);
+                int frame = controller1.FrameCount;
+                if (_isTempered == true && ts.Seconds % 3 == 0)
+                {
+                    controller1.Pause();
+
+                    controller1.GotoFrame();
+                }
+                */
+
             }
 
-            if(_TankIsFull == true && fl_In_Stock==true)
+            if(_TankIsFull == true && fl_In_Stock==true && _isTempered == true)
             {
                 fl_dock.IsEnabled = true;
             }
