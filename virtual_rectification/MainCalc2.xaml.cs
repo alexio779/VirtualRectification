@@ -82,42 +82,45 @@ namespace virtual_rectification
         }
 
         //функция обрабатывает нажатие на кнопку "Подать воду на дефлегматор"
-        private void Def_Voda_Click(object sender, RoutedEventArgs e)
+        private void Water_Click(object sender, RoutedEventArgs e)
         {
             
             if (def_water_is_on == false)
             {
-                WaterDefStart();
+                WaterStart();
             }
             else
             {
-                WaterDefFinish();
+                WaterFinish();
             }
 
         }
 
         //Подача воды в дефлегматор
-        void WaterDefStart()
+        void WaterStart()
         {
             def_water_is_on = true;
+            hol_water_is_on = true;
 
-            water_def_dock.IsEnabled = true;
+            water_dock.IsEnabled = true;
 
-            def_voda_pusk.Content = "Закрыть воду на дефлегматор";
+            water_pusk.Content = "Закрыть воду";
         }
 
         //Остановка воды в дефлегматоре
-        void WaterDefFinish()
+        void WaterFinish()
         {
             def_water_is_on = false;
+            hol_water_is_on = false;
 
-            water_def_dock.IsEnabled = false;
+            water_dock.IsEnabled = false;
 
-            water_def_slider.Value = 0;
+            water_slider.Value = 0;
 
+            HolodilnikStopWater();
             DeflegmatorStopWater();
 
-            def_voda_pusk.Content = "Подать воду на дефлегматор";
+            water_pusk.Content = "Подать воду";
         }
 
         //Функция отвечает за воду в холодильнике
@@ -144,44 +147,6 @@ namespace virtual_rectification
                     controller4.Play();
                 }
             }
-        }
-
-        //Обработчик нажатия кнопки подычи воды на холодильник
-        private void Hol_voda_pusk_Click(object sender, RoutedEventArgs e)
-        {
-            if (hol_water_is_on == false)
-            {
-                HolWaterStart();
-            }
-            else
-            {
-                HolWaterFinish();
-            }
-        }
-        
-        //Подача воды в холодильник
-        void HolWaterStart()
-        {
-            hol_water_is_on = true;
-
-            water_hol_dock.IsEnabled = true;
-
-            hol_voda_pusk.Content = "Закрыть воду на холодильник";
-        }
-
-        //Остановка воды в холодильнике
-        void HolWaterFinish()
-        {
-
-            water_hol_slider.Value = 0;
-
-            HolodilnikStopWater();
-
-            hol_voda_pusk.Content = "Подать воду на холодильник";
-
-            water_hol_dock.IsEnabled = false;
-
-            hol_water_is_on = false;
         }
 
         //Функция отвечает за всё, что происходит в дефлегматоре
@@ -269,30 +234,22 @@ namespace virtual_rectification
         }
 
         //Слайдер воды дефлегматора
-        private void Water_def_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void Water_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             DeflegmatorWater();
-
-            if(water_def_slider.Value == 0)
-            {
-                DeflegmatorStopWater();
-            }
-        }
-
-        //Слайдер воды холодильника
-        private void Hol_water_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
             HolodilnikWater();
 
-            if (water_hol_slider.Value == 0)
+            if(water_slider.Value == 0)
             {
                 HolodilnikStopWater();
+                DeflegmatorStopWater();
             }
         }
 
         //Функция отвечает за выключение воды в холодильнике
         void HolodilnikStopWater()
         {
+            hol_water_is_on = false;
             //Холодильник
             var controller8 = ImageBehavior.GetAnimationController(cold_water_fr);
             controller8.Pause();
@@ -641,9 +598,8 @@ namespace virtual_rectification
             {
                 //Выбор "ДА"
                 HotFinish();
-                WaterDefFinish();
+                WaterFinish();
                 vapor_finish();
-                HolWaterFinish();
                 sw.Restart();
                 DeflegmatorReset();
                 TankReset();
