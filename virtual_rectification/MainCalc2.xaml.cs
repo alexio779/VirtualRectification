@@ -13,12 +13,13 @@ namespace virtual_rectification
     {
         //Глобальные переменные отслеживающие состояния
         bool hot_is_on = false;
-        bool def_water_is_on = false;
-        bool hol_water_is_on = false;
+        bool water_is_on = false;
+        //bool hol_water_is_on = false;
         bool _isTempered = false;
         bool _TankIsFull = false;
         bool fl_In_Stock = true;
-        int seconds_now = 0;
+        int power_lvl = 0;
+        //int seconds_now = 0;
 
         //1 -й кусок кода, отвечающий за таймер
         DispatcherTimer dt = new DispatcherTimer();
@@ -50,42 +51,49 @@ namespace virtual_rectification
                 ts.Hours, ts.Minutes, ts.Seconds);
                 time_label.Content = currentTime;
 
-
                 //--------------------------------------------------------------
 
-                /*
-                var controller1 = ImageBehavior.GetAnimationController(braga);
-                int frame = controller1.FrameCount;
-                if (_isTempered == true && ts.Seconds % 3 == 0)
+                if (fl_slider.Value == 0 || power_lvl < 1)
                 {
-                    controller1.Pause();
+                    DropsDefStop();
 
-                    controller1.GotoFrame();
+                    fl_slider.Value = 0;
+
+                    fl_dock.IsEnabled = false;
                 }
-                */
 
             }
 
-            if(_TankIsFull == true && fl_In_Stock==true && _isTempered == true)
+            if(_TankIsFull == true && _isTempered == true && power_lvl > 0)
             {
                 fl_dock.IsEnabled = true;
             }
+
         }
 
-        //Новая кнопка "Залить смесь"
-        private void Braga_btn_Click(object sender, RoutedEventArgs e)
+        //Слайдер количества исходной смеси
+        private void Braga_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            var controller1 = ImageBehavior.GetAnimationController(braga);
-            controller1.Play();
+            int frameOfBraga = 0;
+            frameOfBraga = (int)braga_slider.Value; //получаем значение слайдера
+            frameOfBraga = frameOfBraga * 3;
 
-            _TankIsFull = true;
+            var controller1 = ImageBehavior.GetAnimationController(braga);
+            controller1.Pause();
+            controller1.GotoFrame(frameOfBraga);
+
+            if(frameOfBraga > 0)
+            {
+                _TankIsFull = true;
+            }
+            
         }
 
         //функция обрабатывает нажатие на кнопку "Подать воду на дефлегматор"
         private void Water_Click(object sender, RoutedEventArgs e)
         {
             
-            if (def_water_is_on == false)
+            if (water_is_on == false)
             {
                 WaterStart();
             }
@@ -99,8 +107,8 @@ namespace virtual_rectification
         //Подача воды в дефлегматор
         void WaterStart()
         {
-            def_water_is_on = true;
-            hol_water_is_on = true;
+            water_is_on = true;
+            //hol_water_is_on = true;
 
             water_dock.IsEnabled = true;
 
@@ -110,8 +118,8 @@ namespace virtual_rectification
         //Остановка воды в дефлегматоре
         void WaterFinish()
         {
-            def_water_is_on = false;
-            hol_water_is_on = false;
+            water_is_on = false;
+            //hol_water_is_on = false;
 
             water_dock.IsEnabled = false;
 
@@ -239,7 +247,16 @@ namespace virtual_rectification
             DeflegmatorWater();
             HolodilnikWater();
 
-            if(water_slider.Value == 0)
+            if (water_slider.Value > 0)
+            {
+                hot.IsEnabled = true;
+            }
+            else
+            {
+                hot.IsEnabled = false;
+            }
+
+            if (water_slider.Value == 0)
             {
                 HolodilnikStopWater();
                 DeflegmatorStopWater();
@@ -249,7 +266,7 @@ namespace virtual_rectification
         //Функция отвечает за выключение воды в холодильнике
         void HolodilnikStopWater()
         {
-            hol_water_is_on = false;
+            //hol_water_is_on = false;
             //Холодильник
             var controller8 = ImageBehavior.GetAnimationController(cold_water_fr);
             controller8.Pause();
@@ -269,7 +286,7 @@ namespace virtual_rectification
         //Слайдер подачи флегмы
         private void Fl_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (fl_In_Stock == true && tmp_slider_main.Value > 50)
+            if (power_lvl > 0)
             {
                 flegma_r.Visibility = Visibility.Visible;
                 drops1.Visibility = Visibility.Visible;
@@ -280,33 +297,33 @@ namespace virtual_rectification
                 var controller2 = ImageBehavior.GetAnimationController(drops1);
                 var controller3 = ImageBehavior.GetAnimationController(drops2);
                 var controller4 = ImageBehavior.GetAnimationController(drops3);
-                var controller5 = ImageBehavior.GetAnimationController(drops4);
-                var controller6 = ImageBehavior.GetAnimationController(drops5);
 
                 controller1.Play();
                 controller2.Play();
                 controller3.Play();
                 controller4.Play();
                 
-                if (fl_slider.Value == 0)
-                {
-                    controller1.Pause();
-                    flegma_r.Visibility = Visibility.Hidden;
-                    drops1.Visibility = Visibility.Visible;
-                    drops2.Visibility = Visibility.Visible;
-                    drops3.Visibility = Visibility.Visible;
-                    drops4.Visibility = Visibility.Visible;
-                    drops5.Visibility = Visibility.Visible;
-                    controller2.Pause();
-                    controller3.Pause();
-                    controller4.Pause();
-                    controller5.Pause();
-                    controller6.Pause();
-                }
-                
             }
         }
 
+        //сброс капель в колонне
+        void DropsDefStop()
+        {
+            var controller1 = ImageBehavior.GetAnimationController(drops1);
+            controller1.Pause();
+            controller1.GotoFrame(0);
+            drops1.Visibility = Visibility.Hidden;
+            var controller2 = ImageBehavior.GetAnimationController(drops2);
+            controller2.Pause();
+            controller2.GotoFrame(0);
+            drops2.Visibility = Visibility.Hidden;
+            var controller3 = ImageBehavior.GetAnimationController(drops3);
+            controller3.Pause();
+            controller3.GotoFrame(0);
+            drops3.Visibility = Visibility.Hidden;
+
+            flegma_r.Visibility = Visibility.Hidden;
+        }
         //Сброс дефлегматора
         void DeflegmatorReset()
         {
@@ -330,19 +347,24 @@ namespace virtual_rectification
             controller1.Pause();
             controller1.GotoFrame(0);
 
+            braga_slider.Value = 0;
+
             _TankIsFull = false;
         }
         
         //Функция, обрабатывающая нажатие кнопки
         private void Hot_Click(object sender, RoutedEventArgs e)
         {
+
             if (hot_is_on == false)
             {
                 HotStart();
+                braga_dock.IsEnabled = false;
             }
             else
             {
                 HotFinish();
+                braga_dock.IsEnabled = true;
             }
         }
 
@@ -351,10 +373,12 @@ namespace virtual_rectification
         {
             hot_is_on = true;
 
+            water_pusk.IsEnabled = false;
+
             //делаем слайдер активным
             tmp_slider.IsEnabled = true;
 
-            hot.Content = "Выключить нагрев";
+            hot.Content = "Выключить ЛАТР";
         }
 
         //функция отвечает за выключение нагрева
@@ -362,8 +386,10 @@ namespace virtual_rectification
         {
             tmp_slider.IsEnabled = false;
 
+            water_pusk.IsEnabled = true;
+
             //меняем надпись на кнопке
-            hot.Content = "Включить нагрев";
+            hot.Content = "Включить ЛАТР";
 
             //меняем проверку на нагрев
             hot_is_on = false;
@@ -423,13 +449,13 @@ namespace virtual_rectification
             rec3.Fill = brush1;
 
             //Отвечает за пар
-            var controller = ImageBehavior.GetAnimationController(braga);
 
-            double vapour_opacity = Math.Round(tmp_slider_main.Value)/100;
+            double vapour_opacity = 0;
             
 
-            if (controller.IsComplete==true && tmp_slider_main.Value >= 60)
+            if (_TankIsFull==true && tmp_slider_main.Value == 4)
             {
+                vapour_opacity = 0.7;
                 vapour_blue1.Opacity = vapour_opacity;
                 vapour_blue2.Opacity = vapour_opacity;
                 vapour_gray4.Opacity = vapour_opacity;
@@ -437,6 +463,7 @@ namespace virtual_rectification
                 vapour_gray2.Opacity = vapour_opacity;
                 vapour_gray1.Opacity = vapour_opacity;
                 vapour_gray3.Opacity = vapour_opacity;
+
                 distildone.Opacity = vapour_opacity;
                 distil_line.Visibility = Visibility.Visible;
 
@@ -455,7 +482,34 @@ namespace virtual_rectification
                 BubblesAndFlegma();
             }
 
-            if (controller.IsComplete == true && tmp_slider_main.Value < 50 && _isTempered == true)
+            if (_TankIsFull == true && tmp_slider_main.Value >= 2 && tmp_slider_main.Value < 4)
+            {
+                vapour_opacity = 0.4;
+                vapour_blue1.Opacity = vapour_opacity;
+                vapour_blue2.Opacity = vapour_opacity;
+                vapour_gray4.Opacity = vapour_opacity;
+                vapour_gray_l.Opacity = vapour_opacity;
+                vapour_gray2.Opacity = vapour_opacity;
+                vapour_gray1.Opacity = vapour_opacity;
+                vapour_gray3.Opacity = vapour_opacity;
+                distildone.Opacity = vapour_opacity;
+
+                drops6.Visibility = Visibility.Visible;
+                var controller2 = ImageBehavior.GetAnimationController(drops6);
+                controller2.Play();
+
+                drops4.Visibility = Visibility.Visible;
+                var controller3 = ImageBehavior.GetAnimationController(drops4);
+                controller3.Play();
+
+                drops5.Visibility = Visibility.Visible;
+                var controller4 = ImageBehavior.GetAnimationController(drops5);
+                controller4.Play();
+
+                BubblesAndFlegma();
+            }
+
+            if (tmp_slider_main.Value < 2 && _isTempered == true)
             {
                 vapour_opacity = 0.3;
                 vapour_blue1.Opacity = vapour_opacity;
@@ -473,26 +527,35 @@ namespace virtual_rectification
                 var controller3 = ImageBehavior.GetAnimationController(flegma_s);
                 controller3.Pause();
 
+                drops4.Visibility = Visibility.Hidden;
+                var controller4 = ImageBehavior.GetAnimationController(drops4);
+                controller4.Pause();
+
+                drops5.Visibility = Visibility.Hidden;
+                var controller5 = ImageBehavior.GetAnimationController(drops5);
+                controller5.Pause();
+
                 vapor_finish_smooth();
             }
 
-            if(controller.IsComplete == true && tmp_slider_main.Value > 50 && tmp_slider_main.Value < 60)
+            //определение уровня мощности
+
+            int pwrValue = (int)tmp_slider_main.Value;
+
+            switch (pwrValue)
             {
-                vapour_opacity = 0.4;
-                vapour_blue1.Opacity = vapour_opacity;
-                vapour_blue2.Opacity = vapour_opacity;
-                vapour_gray4.Opacity = vapour_opacity;
-                vapour_gray_l.Opacity = vapour_opacity;
-                vapour_gray2.Opacity = vapour_opacity;
-                vapour_gray1.Opacity = vapour_opacity;
-                vapour_gray3.Opacity = vapour_opacity;
-                distildone.Opacity = vapour_opacity;
-
-                drops6.Visibility = Visibility.Visible;
-                var controller2 = ImageBehavior.GetAnimationController(drops6);
-                controller2.Play();
-
-                BubblesAndFlegma();
+                case 2:
+                    power_lvl = 1;
+                    break;
+                case 3:
+                    power_lvl = 1;
+                    break;
+                case 4:
+                    power_lvl = 2; ;
+                    break;
+                default:
+                    power_lvl = 0;
+                    break;
             }
 
         }
@@ -522,21 +585,13 @@ namespace virtual_rectification
             _isTempered = true;
         }
 
-        //Сброс капель
+        //Сброс всех капель
         void DropsReset()
         {
-            var controller1 = ImageBehavior.GetAnimationController(drops1);
-            controller1.Pause();
-            controller1.GotoFrame(0);
-            drops1.Visibility = Visibility.Hidden;
-            var controller2 = ImageBehavior.GetAnimationController(drops2);
-            controller2.Pause();
-            controller2.GotoFrame(0);
-            drops2.Visibility = Visibility.Hidden;
-            var controller3 = ImageBehavior.GetAnimationController(drops3);
-            controller3.Pause();
-            controller3.GotoFrame(0);
-            drops3.Visibility = Visibility.Hidden;
+            //капли в колонне
+            DropsDefStop();
+            
+            //капли в дефлегматоре
             var controller4 = ImageBehavior.GetAnimationController(drops4);
             controller4.Pause();
             controller4.GotoFrame(0);
@@ -545,6 +600,8 @@ namespace virtual_rectification
             controller5.Pause();
             controller5.GotoFrame(0);
             drops5.Visibility = Visibility.Hidden;
+
+            //капли в ёмкость
             var controller6 = ImageBehavior.GetAnimationController(drops6);
             controller6.Pause();
             controller6.GotoFrame(0);
@@ -607,5 +664,7 @@ namespace virtual_rectification
                 DetailsReset();
             }
         }
+
+
     }
 }
