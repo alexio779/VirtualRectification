@@ -403,6 +403,7 @@ namespace virtual_rectification
         {
             await Task.Delay(2000);
             double cold_op = 0;
+            vapour_blue0.Opacity = cold_op;
             vapour_blue1.Opacity = cold_op;
             vapour_blue2.Opacity = cold_op;
             vapour_gray4.Opacity = cold_op;
@@ -422,6 +423,7 @@ namespace virtual_rectification
         {
 
             double cold_op = 0;
+            vapour_blue0.Opacity = cold_op;
             vapour_blue1.Opacity = cold_op;
             vapour_blue2.Opacity = cold_op;
             vapour_gray4.Opacity = cold_op;
@@ -456,6 +458,7 @@ namespace virtual_rectification
             if (_TankIsFull==true && tmp_slider_main.Value == 4)
             {
                 vapour_opacity = 0.7;
+                vapour_blue0.Opacity = vapour_opacity;
                 vapour_blue1.Opacity = vapour_opacity;
                 vapour_blue2.Opacity = vapour_opacity;
                 vapour_gray4.Opacity = vapour_opacity;
@@ -485,6 +488,7 @@ namespace virtual_rectification
             if (_TankIsFull == true && tmp_slider_main.Value >= 2 && tmp_slider_main.Value < 4)
             {
                 vapour_opacity = 0.4;
+                vapour_blue0.Opacity = vapour_opacity;
                 vapour_blue1.Opacity = vapour_opacity;
                 vapour_blue2.Opacity = vapour_opacity;
                 vapour_gray4.Opacity = vapour_opacity;
@@ -512,6 +516,7 @@ namespace virtual_rectification
             if (tmp_slider_main.Value < 2 && _isTempered == true)
             {
                 vapour_opacity = 0.3;
+                vapour_blue0.Opacity = vapour_opacity;
                 vapour_blue1.Opacity = vapour_opacity;
                 vapour_blue2.Opacity = vapour_opacity;
                 vapour_gray4.Opacity = vapour_opacity;

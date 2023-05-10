@@ -123,6 +123,8 @@
             </Rectangle.RenderTransform>
         </Rectangle>
         -->
+        <Image x:Name="vapour_blue0" Opacity="0" gif:ImageBehavior.AnimatedSource="Resources/vapour_blue.gif" Visibility="Visible" Margin="267,494,0,0" Stretch="Fill" Height="169" VerticalAlignment="Top" HorizontalAlignment="Left" Width="215"/>
+
         <Image x:Name="braga" Stretch="Fill" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/braga.gif" Margin="273,489,0,0" Height="114" VerticalAlignment="Top" HorizontalAlignment="Left" Width="209"></Image>
 
 
@@ -145,6 +147,7 @@
         <Image x:Name="drops2" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" gif:ImageBehavior.AutoStart="False" Margin="370,272,0,0" Stretch="Uniform" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
         <Image x:Name="drops3" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" gif:ImageBehavior.AutoStart="False" Margin="355,272,0,0" Stretch="Uniform" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
         <Image x:Name="drops4" gif:ImageBehavior.AnimatedSource="/Resources/drops.gif" Visibility="Hidden" gif:ImageBehavior.AutoStart="False" Margin="535,97,0,0" Stretch="Uniform" Height="79" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
+
 
         <!--Основная схема-->
         <Image Source="Resources/REK_3.2_obr2_new_2.png" Stretch="Uniform" Margin="237,20,0,0" Height="643" VerticalAlignment="Top" HorizontalAlignment="Left" Width="806"/>
@@ -219,6 +222,32 @@
 
         <!--Датчики температуры-->
         <TextBox x:Name="def_water_in_sensor" Text="15 °C" Margin="658,99,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="def_water_out_sensor" Text="0 °C" Margin="565,260,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="distil_tmp" Text="0 °C" Margin="968,385,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="flegma_tmp" Text="0 °C" Margin="485,204,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="vapour_tmp_0" Text="0 °C" Margin="305,404,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="vapour_tmp_1" Text="0 °C" Margin="305,320,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="vapour_tmp_2" Text="0 °C" Margin="305,230,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+
+        <!--Прогресс бар куба-->
+        <Rectangle Margin="478,493,0,0" Height="2" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" ></Rectangle>
+        <Rectangle Margin="478,597,0,0" Height="3" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" ></Rectangle>
+        <ProgressBar Minimum="0" Maximum="100" BorderBrush="LightSlateGray" Background="WhiteSmoke" Value="75" Margin="487,494,0,0" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="15" Orientation="Vertical"/>
+        <Label Content="100%" Margin="477,476,0,0" Height="24" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35"></Label>
+        <Label Content="0%" Margin="483,594,0,0" Height="26" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26"/>
+        <ProgressBar Minimum="0" Maximum="100" Foreground="Red" BorderBrush="LightSlateGray" Background="WhiteSmoke" Value="75" Margin="512,494,0,0" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="15" Orientation="Vertical"/>
+
+
+        <!--Линии-деления колонны-->
+        <Rectangle Margin="305,421,0,0" Height="1" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" ></Rectangle>
+        <Rectangle Margin="305,337,0,0" Height="1" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" ></Rectangle>
+        <Rectangle Margin="305,247,0,0" Height="1" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" ></Rectangle>
+        <Label Content="T °C" Margin="507,476,0,0" Height="23" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="31"/>
+        <Label Content="0 °C" Margin="506,594,0,0" Height="26" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="33"/>
+
+        <!--
+        <Rectangle Margin="38,489,0,0" Stroke="Black" StrokeThickness="1" Fill="GhostWhite" Height="110" VerticalAlignment="Top" HorizontalAlignment="Left" Width="160" RadiusY="12" RadiusX="12"></Rectangle>
+        -->
 
     </Grid>
 </Window>
