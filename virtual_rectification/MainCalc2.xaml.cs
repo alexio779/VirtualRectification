@@ -18,6 +18,7 @@ namespace virtual_rectification
         bool _isTempered = false;
         bool _TankIsFull = false;
         bool fl_In_Stock = true;
+        bool tmp_maxed = false;
         int power_lvl = 0;
         //int seconds_now = 0;
 
@@ -27,6 +28,12 @@ namespace virtual_rectification
         Stopwatch sw = new Stopwatch();
 
         string currentTime = string.Empty;
+
+        DispatcherTimer dt2 = new DispatcherTimer();
+
+        Stopwatch sw2 = new Stopwatch();
+
+        string currentTime2 = string.Empty;
         //-------------------------------------
 
         public MainCalc2()
@@ -39,6 +46,10 @@ namespace virtual_rectification
             sw.Start();
             dt.Start();
             //------------------------------------
+            dt2.Tick += new EventHandler(dt2_Tick);
+            dt2.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            sw2.Start();
+            dt2.Start();
         }
 
         //3-й кусок кода, отвечающий за таймер (событие "тика")
@@ -69,6 +80,59 @@ namespace virtual_rectification
                 fl_dock.IsEnabled = true;
             }
 
+            //--------------------------------------------------------------------------------
+
+            if(temperature_progress.Value < 20 && tmp_maxed == true)
+            {
+                def_water_out_sensor.Text = "15 °C";
+                vapour_tmp_0.Text = "0 °C";
+                vapour_tmp_1.Text = "0 °C";
+                vapour_tmp_2.Text = "0 °C";
+
+            }
+
+            //----------------------------------------------------------------------------------
+
+        }
+
+        void dt2_Tick(object sender, EventArgs e)
+        {
+            if (sw.IsRunning)
+            {
+                TimeSpan ts = sw.Elapsed;
+                currentTime = String.Format("{0:00}:{1:00}:{2:00}",
+                ts.Hours, ts.Minutes, ts.Seconds);
+                time_label.Content = currentTime;
+
+                //--------------------------------------------------------------
+                
+                //Убывание исходной смеси и появление дистиллята
+
+                if(temperature_progress.Value > 60 && _TankIsFull && power_lvl >= 2 && braga_slider.Value != 0)
+                {
+
+                    double rashod_smesi = 0.1;
+                    braga_slider.Value = braga_slider.Value - rashod_smesi;
+
+                    var controller1 = ImageBehavior.GetAnimationController(distil_g);
+
+                    double distil_done = rashod_smesi * 0.1 * 400;
+
+
+                    double distil_kol_res = distil_done / 400;
+
+                    distil_kol.Text = distil_kol_res.ToString();
+
+                    distil_progress.Value = distil_progress.Value + distil_done;
+
+                    if (controller1.CurrentFrame < 24)
+                    {
+                        controller1.GotoFrame((int)distil_progress.Value / 4);
+                    }
+
+                }
+
+            }
         }
 
         //Слайдер количества исходной смеси
@@ -324,6 +388,7 @@ namespace virtual_rectification
 
             flegma_r.Visibility = Visibility.Hidden;
         }
+
         //Сброс дефлегматора
         void DeflegmatorReset()
         {
@@ -348,6 +413,7 @@ namespace virtual_rectification
             controller1.GotoFrame(0);
 
             braga_slider.Value = 0;
+            braga_dock.IsEnabled = true;
 
             _TankIsFull = false;
         }
@@ -439,10 +505,62 @@ namespace virtual_rectification
         //Отслеживание значения слайдера температуры нагрева и спавним пар
         private void tmp_slider_main_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            //определение уровня мощности
+
+            int pwrValue = (int)tmp_slider_main.Value;
+
+            switch (pwrValue)
+            {
+                case 1:
+                    power_lvl = 1;
+                    break;
+                case 2:
+                    power_lvl = 2;
+                    break;
+                case 3:
+                    power_lvl = 3;
+                    break;
+                case 4:
+                    power_lvl = 4;
+                    break;
+                default:
+                    power_lvl = 0;
+                    break;
+            }
+
+            //привязка нагрева к прогресс-бару
+            ProgressTemper();
+
+        }
+        //Функция заполнения прогресс-бара
+        async void ProgressTemper()
+        {
+            if(power_lvl == 0)
+            {
+                for (int i = (int)temperature_progress.Value; i > 0; i--)
+                {
+                    temperature_progress.Value = i;
+                    await Task.Delay(200);
+                }
+            }
+
+            if(power_lvl == 2)
+            {
+                for (int i = (int)temperature_progress.Value; i <= 85; i++)
+                {
+                    temperature_progress.Value = i;
+                    await Task.Delay(200);
+                }
+            }
+        }
+
+        //Отслеживание изменения прогресс-бара
+        private void Temperature_progress_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
             //Создаём кисть красного цвета
             SolidColorBrush brush1 = new SolidColorBrush(Colors.Red);
 
-            double tmp_vl = Math.Round(tmp_slider_main.Value)/100;
+            double tmp_vl = Math.Round(temperature_progress.Value) / 100;
 
             brush1.Opacity = tmp_vl;
 
@@ -453,9 +571,8 @@ namespace virtual_rectification
             //Отвечает за пар
 
             double vapour_opacity = 0;
-            
 
-            if (_TankIsFull==true && tmp_slider_main.Value == 4)
+            if (_TankIsFull == true && temperature_progress.Value == 85)
             {
                 vapour_opacity = 0.7;
                 vapour_blue0.Opacity = vapour_opacity;
@@ -482,10 +599,18 @@ namespace virtual_rectification
                 var controller3 = ImageBehavior.GetAnimationController(drops5);
                 controller3.Play();
 
+                tmp_maxed = true;
+
                 BubblesAndFlegma();
+
+                def_water_out_sensor.Text = "35 °C";
+                vapour_tmp_0.Text = "82 °C";
+                vapour_tmp_1.Text = "79 °C";
+                vapour_tmp_2.Text = "76 °C";
+                flegma_tmp.Text = "55 °C";
             }
 
-            if (_TankIsFull == true && tmp_slider_main.Value >= 2 && tmp_slider_main.Value < 4)
+            if (_TankIsFull == true && temperature_progress.Value > 60)
             {
                 vapour_opacity = 0.4;
                 vapour_blue0.Opacity = vapour_opacity;
@@ -513,7 +638,7 @@ namespace virtual_rectification
                 BubblesAndFlegma();
             }
 
-            if (tmp_slider_main.Value < 2 && _isTempered == true)
+            if (temperature_progress.Value < 10 && _isTempered == true && tmp_maxed == true)
             {
                 vapour_opacity = 0.3;
                 vapour_blue0.Opacity = vapour_opacity;
@@ -540,41 +665,19 @@ namespace virtual_rectification
                 var controller5 = ImageBehavior.GetAnimationController(drops5);
                 controller5.Pause();
 
+                tmp_maxed = false;
+
                 vapor_finish_smooth();
             }
-
-            //определение уровня мощности
-
-            int pwrValue = (int)tmp_slider_main.Value;
-
-            switch (pwrValue)
-            {
-                case 2:
-                    power_lvl = 1;
-                    break;
-                case 3:
-                    power_lvl = 1;
-                    break;
-                case 4:
-                    power_lvl = 2; ;
-                    break;
-                default:
-                    power_lvl = 0;
-                    break;
-            }
-
         }
 
         //Анимация деталей
         void BubblesAndFlegma()
         {
             //временно
-            var controller1 = ImageBehavior.GetAnimationController(distil_g);
+            
             var controller2 = ImageBehavior.GetAnimationController(bubbles1);
             var controller3 = ImageBehavior.GetAnimationController(bubbles2);
-            distil_g.Visibility = Visibility.Visible;
-            ImageBehavior.SetAnimationSpeedRatio(distil_g, 0.1);
-            controller1.Play();
 
             bubbles1.Visibility = Visibility.Visible;
             controller2.Play();
@@ -628,6 +731,8 @@ namespace virtual_rectification
             controller3.Pause();
             controller3.GotoFrame(0);
             distil_g.Visibility = Visibility.Hidden;
+
+            flegma_tmp.Text = "0 °C";
         }
 
         //Кнопка выхода
@@ -642,8 +747,8 @@ namespace virtual_rectification
             else
             {
                 //Выбор "ДА"            
-                Results results = new Results();
-                results.Show();
+                //Results results = new Results();
+                //results.Show();
                 this.Close();
             }
         }
@@ -669,7 +774,5 @@ namespace virtual_rectification
                 DetailsReset();
             }
         }
-
-
     }
 }

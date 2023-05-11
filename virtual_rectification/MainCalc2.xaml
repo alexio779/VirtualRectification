@@ -17,12 +17,9 @@
                     <GradientStop Color="lightBlue" Offset="0.0"/>
                     <GradientStop Color="LightSteelBlue" Offset="0.5"/>
                     <GradientStop Color="Aquamarine" Offset="1.0"/>
-
-
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-
 
         <!--Фон за схемой-->
         <Rectangle Fill="WhiteSmoke" Width="810" Height="647" Stroke="SteelBlue" Margin="235,18,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -178,7 +175,6 @@
             <Slider x:Name="braga_slider" Minimum="0" Maximum="10" TickPlacement="None" TickFrequency="0.5" IsSnapToTickEnabled="True" ValueChanged="Braga_slider_ValueChanged"/>
         </DockPanel>
 
-
         <!--Нагревающий элемент-->
         <Rectangle x:Name="rec1" HorizontalAlignment="Left" Height="10" Margin="275,562,0,0" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
@@ -193,7 +189,6 @@
         <Rectangle x:Name="rec2" HorizontalAlignment="Left" Height="10" Margin="274,580,0,0" VerticalAlignment="Top" Width="179" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
-
                     <ScaleTransform ScaleY="-1"/>
                     <SkewTransform/>
                     <RotateTransform/>
@@ -203,13 +198,11 @@
         </Rectangle>
         <Rectangle x:Name="rec3" HorizontalAlignment="Left" Height="28" Margin="449,562,0,0" VerticalAlignment="Top" Width="9" RadiusX="5" RadiusY="5"/>
 
-
         <!--кнопки панели управления-->
         <Button x:Name="hot" HorizontalContentAlignment="Center" IsEnabled="False" Content="Включить ЛАТР" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="177" Click="Hot_Click" Margin="26,230,0,0"/>
         <Button x:Name="water_pusk" Content="Подать воду" FontSize="14" Margin="26,149,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="177" Click="Water_Click"/>
         <Button x:Name="exit_btn" Content="Завершить работу" Margin="1071,627,0,0" Width="177" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Exit_btn_Click"/>
         <Button x:Name="restart" Content="Сбросить всё" Margin="1071,567,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="177" Click="Restart_Click"/>
-
 
         <!--Таймер-->
         <Label x:Name="time_label" Visibility="Visible" Margin="246,20,0,0" VerticalContentAlignment="Center" Height="49" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134"></Label>
@@ -223,31 +216,38 @@
         <!--Датчики температуры-->
         <TextBox x:Name="def_water_in_sensor" Text="15 °C" Margin="658,99,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
         <TextBox x:Name="def_water_out_sensor" Text="0 °C" Margin="565,260,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
-        <TextBox x:Name="distil_tmp" Text="0 °C" Margin="968,385,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="distil_kol" Text="0" Margin="811,427,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
         <TextBox x:Name="flegma_tmp" Text="0 °C" Margin="485,204,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
         <TextBox x:Name="vapour_tmp_0" Text="0 °C" Margin="305,404,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
         <TextBox x:Name="vapour_tmp_1" Text="0 °C" Margin="305,320,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
         <TextBox x:Name="vapour_tmp_2" Text="0 °C" Margin="305,230,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="braga_tmp" Margin="501,535,0,0" Text="{Binding ElementName=temperature_progress, Path=Value, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+
 
         <!--Прогресс бар куба-->
-        <Rectangle Margin="478,493,0,0" Height="2" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" ></Rectangle>
-        <Rectangle Margin="478,597,0,0" Height="3" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" ></Rectangle>
-        <ProgressBar Minimum="0" Maximum="100" BorderBrush="LightSlateGray" Background="WhiteSmoke" Value="75" Margin="487,494,0,0" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="15" Orientation="Vertical"/>
-        <Label Content="100%" Margin="477,476,0,0" Height="24" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35"></Label>
-        <Label Content="0%" Margin="483,594,0,0" Height="26" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="26"/>
-        <ProgressBar Minimum="0" Maximum="100" Foreground="Red" BorderBrush="LightSlateGray" Background="WhiteSmoke" Value="75" Margin="512,494,0,0" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="15" Orientation="Vertical"/>
+        <Rectangle Margin="478,493,0,0" Height="3" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18" ></Rectangle>
+        <Rectangle Margin="478,597,0,0" Height="3" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18" ></Rectangle>
+        <ProgressBar x:Name="temperature_progress" Minimum="0" ValueChanged="Temperature_progress_ValueChanged" Maximum="85" Foreground="Red" BorderBrush="LightSlateGray" Background="WhiteSmoke" Value="0" Margin="487,494,0,0" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="9" Orientation="Vertical"/>
+
+        <!--Прогресс бар ёмкости с дистиллятом-->
+        <Rectangle Margin="852,385,0,0" Height="3" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18" ></Rectangle>
+        <Rectangle Margin="852,491,0,0" Height="3" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18" ></Rectangle>
+        <ProgressBar x:Name="distil_progress" Minimum="0" Foreground="Aqua" ValueChanged="Temperature_progress_ValueChanged" Maximum="100" BorderBrush="LightSlateGray" Background="WhiteSmoke" Value="0" Margin="852,387,0,0" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="9" Orientation="Vertical"/>
 
 
         <!--Линии-деления колонны-->
         <Rectangle Margin="305,421,0,0" Height="1" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" ></Rectangle>
         <Rectangle Margin="305,337,0,0" Height="1" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" ></Rectangle>
         <Rectangle Margin="305,247,0,0" Height="1" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" ></Rectangle>
-        <Label Content="T °C" Margin="507,476,0,0" Height="23" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="31"/>
-        <Label Content="0 °C" Margin="506,594,0,0" Height="26" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="33"/>
+        <Label Content="T °C" Margin="478,476,0,0" Height="23" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
+        <Label Content="0 °C" Margin="478,593,0,0" Height="26" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="33"/>
 
         <!--
         <Rectangle Margin="38,489,0,0" Stroke="Black" StrokeThickness="1" Fill="GhostWhite" Height="110" VerticalAlignment="Top" HorizontalAlignment="Left" Width="160" RadiusY="12" RadiusX="12"></Rectangle>
         -->
+        <Label Content="°C" Margin="514,531,0,0" Height="26" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left" Width="33"/>
+        <Label Content="л" Margin="832,423,0,0" Height="26" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left" Width="17"/>
+
 
     </Grid>
 </Window>
