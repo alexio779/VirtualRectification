@@ -118,8 +118,9 @@ namespace virtual_rectification
 
                     double distil_done = rashod_smesi * 0.1 * 400;
 
-
-                    double distil_kol_res = distil_done / 400;
+                    double distil_kol_res = 0;
+                    distil_kol_res = distil_kol_res + distil_done / 400;
+                    
 
                     distil_kol.Text = distil_kol_res.ToString();
 

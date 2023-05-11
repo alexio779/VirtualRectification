@@ -232,7 +232,7 @@
         <!--Прогресс бар ёмкости с дистиллятом-->
         <Rectangle Margin="852,385,0,0" Height="3" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18" ></Rectangle>
         <Rectangle Margin="852,491,0,0" Height="3" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18" ></Rectangle>
-        <ProgressBar x:Name="distil_progress" Minimum="0" Foreground="Aqua" ValueChanged="Temperature_progress_ValueChanged" Maximum="100" BorderBrush="LightSlateGray" Background="WhiteSmoke" Value="0" Margin="852,387,0,0" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="9" Orientation="Vertical"/>
+        <ProgressBar x:Name="distil_progress" Minimum="0" Foreground="Aqua" ValueChanged="Temperature_progress_ValueChanged" Maximum="400" BorderBrush="LightSlateGray" Background="WhiteSmoke" Value="0" Margin="852,387,0,0" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="9" Orientation="Vertical"/>
 
 
         <!--Линии-деления колонны-->
