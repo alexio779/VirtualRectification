@@ -765,14 +765,10 @@ namespace virtual_rectification
             else
             {
                 //Выбор "ДА"
-                HotFinish();
-                WaterFinish();
-                vapor_finish();
-                sw.Restart();
-                DeflegmatorReset();
-                TankReset();
-                DropsReset();
-                DetailsReset();
+                MainCalc2 mc2 = new MainCalc2();
+                mc2.Show();
+                this.Close();
+
             }
         }
     }
