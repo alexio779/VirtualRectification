@@ -21,6 +21,8 @@ namespace virtual_rectification
         bool tmp_maxed = false;
         int power_lvl = 0;
         double wsv = 0, wmv = 0;
+        double distil_kol_res = 0;
+        
         //int seconds_now = 0;
 
         //1 -й кусок кода, отвечающий за таймер
@@ -112,13 +114,13 @@ namespace virtual_rectification
                 {
 
                     double rashod_smesi = 0.1;
-                    braga_slider.Value = braga_slider.Value - rashod_smesi;
+                    
 
                     var controller1 = ImageBehavior.GetAnimationController(distil_g);
 
                     double distil_done = rashod_smesi * 0.1 * 400;
 
-                    double distil_kol_res = 0;
+
                     distil_kol_res = distil_kol_res + distil_done / 400;
                     
 
@@ -131,6 +133,7 @@ namespace virtual_rectification
                         controller1.GotoFrame((int)distil_progress.Value / 4);
                     }
 
+                    braga_slider.Value = braga_slider.Value - rashod_smesi;
                 }
                 //--------------------------------------------------------------
                 //Мерник воды и заполнение водосборника

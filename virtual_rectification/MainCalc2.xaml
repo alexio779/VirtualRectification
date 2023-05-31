@@ -172,7 +172,7 @@
         <DockPanel x:Name="braga_dock"  IsEnabled="True" VerticalAlignment="Top" Margin="26,109,0,0" Height="28" HorizontalAlignment="Left" Width="192">
             <Label Content="л" FontSize="9" DockPanel.Dock="Right"/>
             <TextBox x:Name="braga_text" Text="{Binding ElementName=braga_slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" MaxLength="10" DockPanel.Dock="Right" TextAlignment="Right" Width="39" />
-            <Slider x:Name="braga_slider" Minimum="0" Maximum="10" TickPlacement="None" TickFrequency="0.5" IsSnapToTickEnabled="True" ValueChanged="Braga_slider_ValueChanged"/>
+            <Slider x:Name="braga_slider" Minimum="0" Maximum="10" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="Braga_slider_ValueChanged"/>
         </DockPanel>
 
         <!--Нагревающий элемент-->
@@ -216,7 +216,7 @@
         <!--Датчики температуры-->
         <TextBox x:Name="def_water_in_sensor" Text="15 °C" Margin="658,99,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
         <TextBox x:Name="def_water_out_sensor" Text="0 °C" Margin="565,260,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
-        <TextBox x:Name="distil_kol" Text="0" Margin="811,427,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="distil_kol" Text="0.00" Margin="810,427,0,0" HorizontalAlignment="Left" Width="37" Height="18" VerticalAlignment="Top" IsReadOnly="True" MaxLength="4"></TextBox>
         <TextBox x:Name="flegma_tmp" Text="0 °C" Margin="485,204,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
         <TextBox x:Name="vapour_tmp_0" Text="0 °C" Margin="305,404,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
         <TextBox x:Name="vapour_tmp_1" Text="0 °C" Margin="305,320,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
