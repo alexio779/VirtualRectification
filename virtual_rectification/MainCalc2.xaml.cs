@@ -49,7 +49,7 @@ namespace virtual_rectification
             sw.Start();
             dt.Start();
             //------------------------------------
-            dt2.Tick += new EventHandler(dt2_Tick);
+            dt2.Tick += new EventHandler(dt2_TickAsync);
             dt2.Interval = new TimeSpan(0, 0, 0, 1, 0);
             sw2.Start();
             dt2.Start();
@@ -98,7 +98,7 @@ namespace virtual_rectification
 
         }
 
-        void dt2_Tick(object sender, EventArgs e)
+        async void dt2_TickAsync(object sender, EventArgs e)
         {
             if (sw.IsRunning)
             {
@@ -112,17 +112,15 @@ namespace virtual_rectification
 
                 if(temperature_progress.Value > 60 && _TankIsFull && power_lvl >= 2 && braga_slider.Value != 0)
                 {
-
                     double rashod_smesi = 0.1;
                     
-
                     var controller1 = ImageBehavior.GetAnimationController(distil_g);
 
                     double distil_done = rashod_smesi * 0.1 * 400;
 
-
                     distil_kol_res = distil_kol_res + distil_done / 400;
-                    
+
+                    distil_kol_res = Math.Round(distil_kol_res, 2);
 
                     distil_kol.Text = distil_kol_res.ToString();
 
@@ -130,7 +128,7 @@ namespace virtual_rectification
 
                     if (controller1.CurrentFrame < 24)
                     {
-                        controller1.GotoFrame((int)distil_progress.Value / 4);
+                        controller1.GotoFrame((int)distil_progress.Value / 16);
                     }
 
                     braga_slider.Value = braga_slider.Value - rashod_smesi;
@@ -155,7 +153,12 @@ namespace virtual_rectification
                     ImageBehavior.SetAnimationSpeedRatio(water_def4, 0.02);
                     controller3.Play();
                 }
-
+                //--------------------------------------------------------------
+                //Отключение при окончании смеси
+                if (braga_slider.Value == 0 && distil_progress.Value > 0)
+                {
+                    HotFinish();
+                }
             }
         }
 
@@ -310,7 +313,6 @@ namespace virtual_rectification
             controller3.GotoFrame(0);
             var controller4 = ImageBehavior.GetAnimationController(water_def4);
             controller4.Pause();
-            controller4.GotoFrame(0);
             var controller5 = ImageBehavior.GetAnimationController(water_def5);
             controller5.Pause();
             controller5.GotoFrame(0);
@@ -551,6 +553,7 @@ namespace virtual_rectification
             ProgressTemper();
 
         }
+
         //Функция заполнения прогресс-бара
         async void ProgressTemper()
         {
@@ -560,6 +563,10 @@ namespace virtual_rectification
                 {
                     temperature_progress.Value = i;
                     await Task.Delay(200);
+                    if (i < 70)
+                    {
+                        fl_slider.Value = 0;
+                    }
                 }
             }
 
@@ -569,6 +576,10 @@ namespace virtual_rectification
                 {
                     temperature_progress.Value = i;
                     await Task.Delay(200);
+                    if (i > 70)
+                    {
+                        fl_slider.Value = 1;
+                    }
                 }
             }
         }
@@ -693,7 +704,6 @@ namespace virtual_rectification
         //Анимация деталей
         void BubblesAndFlegma()
         {
-            //временно
             
             var controller2 = ImageBehavior.GetAnimationController(bubbles1);
             var controller3 = ImageBehavior.GetAnimationController(bubbles2);
@@ -789,5 +799,6 @@ namespace virtual_rectification
 
             }
         }
+
     }
 }

@@ -163,7 +163,7 @@
         <!--Управление флегмой-->
         <DockPanel x:Name="fl_dock"  IsEnabled="False" VerticalAlignment="Top" Margin="26,336,0,0" Height="28" HorizontalAlignment="Left" Width="177">
             <TextBox x:Name="fl_text" Text="{Binding ElementName=fl_slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" MaxLength="1" DockPanel.Dock="Right" TextAlignment="Right" Width="39" />
-            <Slider x:Name="fl_slider" Minimum="0" Maximum="1" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="Fl_slider_ValueChanged"/>
+            <Slider x:Name="fl_slider" Value="1" Minimum="0" Maximum="1" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="Fl_slider_ValueChanged"/>
         </DockPanel>
 
         <Label Content="Подача флегмы" Margin="26,309,0,0" HorizontalContentAlignment="Center" FontSize="14" FontFamily="Arial" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="177"/>
