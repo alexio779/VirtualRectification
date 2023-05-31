@@ -39,7 +39,7 @@
         </Image>
         <Image x:Name="water_def4" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator.gif"  Margin="515,315,0,0" Height="6" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112"/>
         <Image x:Name="water_def5" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator2.gif"  Margin="604,168,0,0" Height="83" VerticalAlignment="Top" HorizontalAlignment="Left" Width="37"/>
-        <Image x:Name="water_def6" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator2.gif"  Margin="613,287,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="14"/>
+        <Image x:Name="water_def6" gif:ImageBehavior.AutoStart="False" Stretch="Fill" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator2.gif"  Margin="613,287,0,0" Height="189" VerticalAlignment="Top" HorizontalAlignment="Left" Width="14"/>
 
         <!--мерник-->
         <Image x:Name="water_def7" gif:ImageBehavior.AutoStart="False" Visibility="Hidden" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator_up.gif"  Margin="606,233,0,0" Height="55" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35"/>
@@ -221,7 +221,7 @@
         <TextBox x:Name="vapour_tmp_0" Text="0 °C" Margin="305,404,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
         <TextBox x:Name="vapour_tmp_1" Text="0 °C" Margin="305,320,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
         <TextBox x:Name="vapour_tmp_2" Text="0 °C" Margin="305,230,0,0" HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
-        <TextBox x:Name="braga_tmp" Margin="501,535,0,0" Text="{Binding ElementName=temperature_progress, Path=Value, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="braga_tmp" Margin="482,603,0,0" Text="{Binding ElementName=temperature_progress, Path=Value, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Width="36" Height="18" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
 
 
         <!--Прогресс бар куба-->
@@ -234,19 +234,24 @@
         <Rectangle Margin="852,491,0,0" Height="3" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18" ></Rectangle>
         <ProgressBar x:Name="distil_progress" Minimum="0" Foreground="Aqua" ValueChanged="Temperature_progress_ValueChanged" Maximum="400" BorderBrush="LightSlateGray" Background="WhiteSmoke" Value="0" Margin="852,387,0,0" Height="105" VerticalAlignment="Top" HorizontalAlignment="Left" Width="9" Orientation="Vertical"/>
 
+        <!--счётчик ёмкости с водой-->
+        <Rectangle Margin="709,502,0,0" Height="4" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18" ></Rectangle>
+        <Rectangle Margin="709,518,0,0" Height="4" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18" ></Rectangle>
+        <TextBox x:Name="water" Text="0" Margin="727,502,0,0" HorizontalAlignment="Left" Width="36" Height="20" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+
 
         <!--Линии-деления колонны-->
         <Rectangle Margin="305,421,0,0" Height="1" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" ></Rectangle>
         <Rectangle Margin="305,337,0,0" Height="1" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" ></Rectangle>
         <Rectangle Margin="305,247,0,0" Height="1" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" ></Rectangle>
         <Label Content="T °C" Margin="478,476,0,0" Height="23" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
-        <Label Content="0 °C" Margin="478,593,0,0" Height="26" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="33"/>
 
         <!--
         <Rectangle Margin="38,489,0,0" Stroke="Black" StrokeThickness="1" Fill="GhostWhite" Height="110" VerticalAlignment="Top" HorizontalAlignment="Left" Width="160" RadiusY="12" RadiusX="12"></Rectangle>
         -->
-        <Label Content="°C" Margin="514,531,0,0" Height="26" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left" Width="33"/>
+        <Label Content="°C" Margin="496,599,0,0" Height="26" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left" Width="33"/>
         <Label Content="л" Margin="832,423,0,0" Height="26" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left" Width="17"/>
+        <Label Content="л" Margin="748,498,0,0" Height="26" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18"/>
 
 
     </Grid>
