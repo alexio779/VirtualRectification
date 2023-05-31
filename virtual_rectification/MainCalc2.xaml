@@ -37,12 +37,12 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="water_def4" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator.gif"  Margin="515,315,0,0" Height="6" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112"/>
         <Image x:Name="water_def5" gif:ImageBehavior.AutoStart="False" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator2.gif"  Margin="604,168,0,0" Height="83" VerticalAlignment="Top" HorizontalAlignment="Left" Width="37"/>
         <Image x:Name="water_def6" gif:ImageBehavior.AutoStart="False" Stretch="Fill" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator2.gif"  Margin="613,287,0,0" Height="189" VerticalAlignment="Top" HorizontalAlignment="Left" Width="14"/>
+        <Image x:Name="water_def7" gif:ImageBehavior.AutoStart="False" Visibility="Hidden" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator_up.gif"  Margin="606,233,0,0" Height="55" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35"/>
 
         <!--мерник-->
-        <Image x:Name="water_def7" gif:ImageBehavior.AutoStart="False" Visibility="Hidden" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator_up.gif"  Margin="606,233,0,0" Height="55" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35"/>
+        <Image x:Name="water_def4" gif:ImageBehavior.AutoStart="False" Stretch="Fill" Visibility="Visible" gif:ImageBehavior.AnimatedSource="Resources/water_deflegmator_up.gif"  Margin="529,476,0,0" Height="127" VerticalAlignment="Top" HorizontalAlignment="Left" Width="182"/>
 
         <!--холодильник-->
         <Image x:Name="water_cold_up" gif:ImageBehavior.AnimatedSource="Resources/water_cold_up.gif" gif:ImageBehavior.AutoStart="False" Visibility="Hidden" Margin="945,59,0,0" Stretch="Fill" Height="213" VerticalAlignment="Top" HorizontalAlignment="Left" Width="13"/>
@@ -237,7 +237,7 @@
         <!--счётчик ёмкости с водой-->
         <Rectangle Margin="709,502,0,0" Height="4" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18" ></Rectangle>
         <Rectangle Margin="709,518,0,0" Height="4" Fill="LightslateGray" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18" ></Rectangle>
-        <TextBox x:Name="water" Text="0" Margin="727,502,0,0" HorizontalAlignment="Left" Width="36" Height="20" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="water_meter_value" Text="0.000" Margin="727,502,0,0" HorizontalAlignment="Left" Width="44" Height="20" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
 
 
         <!--Линии-деления колонны-->
@@ -251,7 +251,7 @@
         -->
         <Label Content="°C" Margin="496,599,0,0" Height="26" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left" Width="33"/>
         <Label Content="л" Margin="832,423,0,0" Height="26" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left" Width="17"/>
-        <Label Content="л" Margin="748,498,0,0" Height="26" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18"/>
+        <Label Content="л" Margin="756,498,0,0" Height="26" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left" Width="18"/>
 
 
     </Grid>

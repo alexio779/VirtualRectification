@@ -20,6 +20,7 @@ namespace virtual_rectification
         bool fl_In_Stock = true;
         bool tmp_maxed = false;
         int power_lvl = 0;
+        double wsv = 0, wmv = 0;
         //int seconds_now = 0;
 
         //1 -й кусок кода, отвечающий за таймер
@@ -105,7 +106,6 @@ namespace virtual_rectification
                 time_label.Content = currentTime;
 
                 //--------------------------------------------------------------
-                
                 //Убывание исходной смеси и появление дистиллята
 
                 if(temperature_progress.Value > 60 && _TankIsFull && power_lvl >= 2 && braga_slider.Value != 0)
@@ -131,6 +131,26 @@ namespace virtual_rectification
                         controller1.GotoFrame((int)distil_progress.Value / 4);
                     }
 
+                }
+                //--------------------------------------------------------------
+                //Мерник воды и заполнение водосборника
+                var controller2 = ImageBehavior.GetAnimationController(water_def6);
+                var controller3 = ImageBehavior.GetAnimationController(water_def4);
+                
+                if (controller2.IsComplete == true)
+                {
+                    wsv = water_slider.Value; //получаем значение слайдера water slider value
+
+                    wmv = wmv + wsv / 60; //присваиваем water meter value значение wsv делённое на 60 (в сек)
+
+                    //System.Console.WriteLine("Tick");
+
+                    wmv = Math.Round(wmv, 3); //округляем
+
+                    string value = wmv.ToString();
+                    water_meter_value.Text = value;
+                    ImageBehavior.SetAnimationSpeedRatio(water_def4, 0.02);
+                    controller3.Play();
                 }
 
             }
@@ -225,7 +245,7 @@ namespace virtual_rectification
         //Функция отвечает за всё, что происходит в дефлегматоре
         async void DeflegmatorWater()
         {
-            /*Что тут происходит, присваиваем каждой гифке контроллер для того, чтобы можно было ими управлять,
+            /*Присваиваем каждой гифке контроллер для того, чтобы можно было ими управлять,
              т.е. запускать, останавливать или проверять на завершение
             далее запускаем асинхронный медод отображения с помощью async await с созданием задержки для того, 
             чтобы программа ждала пока завершится гифка и можно было проверить условие завершения для запуска следующей*/
@@ -269,11 +289,6 @@ namespace virtual_rectification
             {
                 controller6.Play();
                 await Task.Delay(3400);
-            }
-
-            if (controller6.IsComplete)
-            {
-                controller4.Play();
             }
         }
 
@@ -371,7 +386,7 @@ namespace virtual_rectification
             }
         }
 
-        //сброс капель в колонне
+        //Сброс капель в колонне
         void DropsDefStop()
         {
             var controller1 = ImageBehavior.GetAnimationController(drops1);
