@@ -25,14 +25,19 @@
 
         </Border>
 
+        <Image x:Name="rek" Source="Resources/rek_col_lab_1.png" HorizontalAlignment="Left" Height="289" Margin="16,130,0,0" VerticalAlignment="Top" Width="184" Visibility="Visible"/>
+        <Image x:Name="rek2" Source="Resources/rek_col_lab_3.jpg" HorizontalAlignment="Left" Height="289" Margin="222,130,0,0" VerticalAlignment="Top" Width="186" Visibility="Visible"/>
 
-        <TextBlock x:Name="TitleOfMainScreen" HorizontalAlignment="Left" Margin="15,15,0,0" TextWrapping="Wrap" Text="ИССЛЕДОВАНИЕ ПРОЦЕССА РЕКТИФИКАЦИИ" VerticalAlignment="Top" FontSize="14" FontFamily="Arial"/>
-        <Rectangle HorizontalAlignment="Left" Height="1" Margin="15,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="320"/>
-        <TextBlock x:Name="NameOfProg1" HorizontalAlignment="Left" Margin="717,28,0,0" TextWrapping="Wrap" Text="ВИРТУАЛЬНАЯ" VerticalAlignment="Top" FontSize="16" FontFamily="Arial"/>
-        <TextBlock x:Name="NameOfProg2" HorizontalAlignment="Left" Margin="717,51,0,0" TextWrapping="Wrap" Text="ЛАБОРАТОРНАЯ" VerticalAlignment="Top" FontSize="16" FontFamily="Arial" RenderTransformOrigin="0.174,0.811"/>
-        <TextBlock x:Name="NameOfProg3" HorizontalAlignment="Left" Margin="717,74,0,0" TextWrapping="Wrap" Text="РАБОТА" VerticalAlignment="Top" FontSize="16" FontFamily="Arial"/>
 
-        <Rectangle HorizontalAlignment="Left" Height="87" Margin="701,15,0,0" Stroke="Black" VerticalAlignment="Top" Width="1"/>
+        <TextBlock x:Name="TitleOfMainScreen_Copy" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" FontFamily="Arial" Margin="15,74,0,0"><Run Text="ИССЛЕДОВАНИЕ ПРОЦЕССА РЕКТИФИКАЦИ"/><Run Text="И"/></TextBlock>
+
+        <TextBlock x:Name="TitleOfMainScreen" HorizontalAlignment="Left" Margin="15,20,0,0" TextWrapping="Wrap" Text="ВИРТУАЛЬНАЯ ЛАБОРАТОРНАЯ РАБОТА" VerticalAlignment="Top" FontSize="14" FontFamily="Arial"/>
+        <Rectangle HorizontalAlignment="Left" Height="1" Margin="16,54,0,0" Stroke="Black" VerticalAlignment="Top" Width="316"/>
+        <TextBlock x:Name="NameOfProg1" HorizontalAlignment="Left" Margin="672,28,0,0" TextWrapping="Wrap" Text="РОССИЙСКИЙ" VerticalAlignment="Top" FontSize="16" FontFamily="Arial"/>
+        <TextBlock x:Name="NameOfProg2" HorizontalAlignment="Left" Margin="672,51,0,0" TextWrapping="Wrap" Text="БИОТЕХНОЛОГИЧЕСКИЙ" VerticalAlignment="Top" FontSize="16" FontFamily="Arial" RenderTransformOrigin="0.174,0.811"/>
+        <TextBlock x:Name="NameOfProg3" HorizontalAlignment="Left" Margin="672,74,0,0" TextWrapping="Wrap" Text="УНИВЕРСИТЕТ" VerticalAlignment="Top" FontSize="16" FontFamily="Arial"/>
+
+        <Rectangle HorizontalAlignment="Left" Height="87" Margin="666,15,0,0" Stroke="Black" VerticalAlignment="Top" Width="1"/>
 
         <Button Grid.Row="0" Grid.Column="0" x:Name="button_Raschet" Click="Button_Click" Margin="707,395,0,0" 
             HorizontalAlignment="Left" 
@@ -47,7 +52,7 @@
 
 
 
-        <Image Source="Resources/logo3.png" Margin="610,20,0,0" Height="77" VerticalAlignment="Top" HorizontalAlignment="Left" Width="79">
+        <Image Source="Resources/logo3.png" Margin="580,18,0,0" Height="78" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

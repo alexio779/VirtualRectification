@@ -256,5 +256,11 @@
   <ItemGroup>
     <Resource Include="Resources\drops_l.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\rek_col_lab_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\rek_col_lab_3.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
