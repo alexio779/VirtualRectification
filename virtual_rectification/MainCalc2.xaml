@@ -147,7 +147,8 @@
 
 
         <!--Основная схема-->
-        <Image Source="Resources/REK_3.2_obr2_new_2.png" Stretch="Uniform" Margin="237,20,0,0" Height="643" VerticalAlignment="Top" HorizontalAlignment="Left" Width="806"/>
+        <Image Source="Resources/REK_3.2_obr2_new_2.png" Stretch="Uniform" Margin="237,20,0,0" 
+               Height="643" VerticalAlignment="Top" HorizontalAlignment="Left" Width="806"/>
         <Image x:Name="vapour_gray1" Opacity="0" gif:ImageBehavior.AnimatedSource="Resources/vapour_gray.gif" Visibility="Visible" Margin="520,86,0,0" Stretch="None" Height="90" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82"/>
 
         <Image x:Name="drops6" gif:ImageBehavior.AnimatedSource="/Resources/drops_l.gif"  Visibility="Hidden" Margin="919,327,0,0" Stretch="Uniform" Height="165" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10"/>
